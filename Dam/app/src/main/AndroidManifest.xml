@@ -23,7 +23,8 @@
             android:name=".ui.LandingPageActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.HomePageActivity" />
-        <activity android:name=".ui.SignInActivity"></activity>
+        <activity android:name=".ui.SignInActivity" />
+        <activity android:name=".ui.SignUpActivity"></activity>
     </application>
 
 </manifest>
