@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigationHomeItem"
+            android:title="Home"
+            android:checked="true"
+            android:icon="@drawable/menu_home" />
+        <item
+            android:id="@+id/navigationProfileItem"
+            android:title="Shop By Category"
+            android:checked="false"
+            android:icon="@drawable/menu_home" />
+
+        <item
+            android:id="@+id/navigationFaqItem"
+            android:title="Your Orders"
+            android:checked="false"
+            android:icon="@drawable/menu_home" />
+        <item
+            android:id="@+id/navigationPrivacyPolicy"
+            android:title="Your Account"
+            android:checked="false"
+            android:icon="@drawable/menu_home" />
+        <item
+            android:id="@+id/navigationTermsAndConditions"
+            android:title="Paytm"
+            android:checked="false"
+            android:icon="@drawable/menu_home" />
+        <item
+            android:id="@+id/navigationContactUs"
+            android:title="Sell on BSA"
+            android:checked="false"
+            android:icon="@drawable/menu_home" />
+
+    </group>
+
+</menu>
