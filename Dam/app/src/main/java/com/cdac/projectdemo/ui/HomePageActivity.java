@@ -1,5 +1,6 @@
 package com.cdac.projectdemo.ui;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -8,11 +9,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
+import com.cdac.projectdemo.Utils.SharedPreferenceManager;
+import com.cdac.projectdemo.model.User;
 import com.cdac.projectdemo.ui.fragments.HomeFragment;
 
 import java.util.prefs.Preferences;
@@ -44,10 +48,28 @@ public class HomePageActivity extends AppCompatActivity {
         toolBarHomePageTitle = (TextView) findViewById(R.id.toolBarHomePageTitle);
 
         // for navigation view
-        textViewUserName = (TextView) navigationView.findViewById(R.id.textViewHANUserName);
-        textViewEmailId = (TextView) navigationView.findViewById(R.id.textViewHANEmailId);
+        SharedPreferenceManager.setApplicationContext(HomePageActivity.this);
+        User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
 
+        View headerLayout = navigationView.getHeaderView(0);
 
+        textViewUserName = (TextView) headerLayout.findViewById(R.id.textViewUserName);
+        textViewEmailId = (TextView) headerLayout.findViewById(R.id.textViewEmailId);
+        Menu menu =navigationView.getMenu();
+
+        MenuItem navigationLogout = menu.findItem(R.id.navigationLogout);
+
+        if(user != null) {
+            textViewEmailId.setVisibility(View.VISIBLE);
+            textViewUserName.setText(user.getFirstName() + user.getLastName());
+            textViewEmailId.setText(user.getEmailId());
+            navigationLogout.setVisible(true);
+        } else {
+            textViewEmailId.setVisibility(View.INVISIBLE);
+            textViewUserName.setText("Welcome, Guest");
+            navigationLogout.setVisible(false);
+
+        }
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -73,8 +95,12 @@ public class HomePageActivity extends AppCompatActivity {
                         fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
 
                         break;
-                    case R.id.navigationContactUs:
-                        fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
+                    case R.id.navigationLogout:
+                        SharedPreferenceManager.clearPreferences();
+                        Intent intent = new Intent(HomePageActivity.this, LandingPageActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
 
                         break;
                 }

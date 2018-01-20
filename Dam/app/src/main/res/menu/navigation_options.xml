@@ -30,8 +30,8 @@
             android:checked="false"
             android:icon="@drawable/menu_home" />
         <item
-            android:id="@+id/navigationContactUs"
-            android:title="Sell on BSA"
+            android:id="@+id/navigationLogout"
+            android:title="Logout"
             android:checked="false"
             android:icon="@drawable/menu_home" />
 

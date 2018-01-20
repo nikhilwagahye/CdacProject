@@ -13,6 +13,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
     private LinearLayout linearLayoutSkipRegistration;
     private Button buttonAlreadyCustomer;
+    private Button buttonCreateAcccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
         linearLayoutSkipRegistration.setOnClickListener(this);
         buttonAlreadyCustomer = (Button) findViewById(R.id.buttonAlreadyCustomer);
         buttonAlreadyCustomer.setOnClickListener(this);
+        buttonCreateAcccount = (Button) findViewById(R.id.buttonCreateAcccount);
+        buttonCreateAcccount.setOnClickListener(this);
+
 
     }
 
@@ -39,7 +43,10 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intent1);
                 break;
 
-
+            case R.id.buttonCreateAcccount:
+                Intent intent2 = new Intent(LandingPageActivity.this, SignUpActivity.class);
+                startActivity(intent2);
+                break;
         }
     }
 }

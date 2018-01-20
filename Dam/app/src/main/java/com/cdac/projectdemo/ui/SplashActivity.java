@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
+import com.cdac.projectdemo.Utils.SharedPreferenceManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        SharedPreferenceManager.setApplicationContext(SplashActivity.this);
 
         new Handler().postDelayed(new Runnable() {
             /*
@@ -51,10 +52,15 @@ public class SplashActivity extends AppCompatActivity {
                 // Start your app main activity
                 try {
 
-                    Intent i = new Intent(SplashActivity.this, LandingPageActivity.class);
-                    startActivity(i);
-                    finish();
-
+                    if(SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
+                        Intent i = new Intent(SplashActivity.this, HomePageActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Intent i = new Intent(SplashActivity.this, LandingPageActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

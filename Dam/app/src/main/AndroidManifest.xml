@@ -23,8 +23,14 @@
             android:name=".ui.LandingPageActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.HomePageActivity" />
-        <activity android:name=".ui.SignInActivity" />
-        <activity android:name=".ui.SignUpActivity"></activity>
+        <activity
+            android:name=".ui.SignInActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.SignUpActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>
