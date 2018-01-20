@@ -111,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Last Name"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:inputType="textPersonName"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
@@ -146,7 +146,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
                 app:passwordToggleEnabled="true">
 
                 <EditText
@@ -156,6 +155,7 @@
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:maxLines="1"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"

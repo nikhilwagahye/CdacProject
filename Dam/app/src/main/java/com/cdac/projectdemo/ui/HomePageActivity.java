@@ -1,5 +1,6 @@
 package com.cdac.projectdemo.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
@@ -30,6 +32,7 @@ public class HomePageActivity extends AppCompatActivity {
     private TextView textViewUserName;
     private TextView textViewEmailId;
     private FragmentManager fragManager;
+    private LinearLayout linearLayoutEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +58,31 @@ public class HomePageActivity extends AppCompatActivity {
 
         textViewUserName = (TextView) headerLayout.findViewById(R.id.textViewUserName);
         textViewEmailId = (TextView) headerLayout.findViewById(R.id.textViewEmailId);
-        Menu menu =navigationView.getMenu();
+
+        linearLayoutEdit = (LinearLayout) headerLayout.findViewById(R.id.linearLayoutEdit);
+        linearLayoutEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomePageActivity.this, EditUserDetailsActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+
+        Menu menu = navigationView.getMenu();
 
         MenuItem navigationLogout = menu.findItem(R.id.navigationLogout);
 
-        if(user != null) {
+        if (user != null) {
             textViewEmailId.setVisibility(View.VISIBLE);
-            textViewUserName.setText(user.getFirstName() + user.getLastName());
+            textViewUserName.setText(user.getFirstName() + " " + user.getLastName());
             textViewEmailId.setText(user.getEmailId());
+            linearLayoutEdit.setVisibility(View.VISIBLE);
             navigationLogout.setVisible(true);
         } else {
             textViewEmailId.setVisibility(View.INVISIBLE);
+            linearLayoutEdit.setVisibility(View.GONE);
+
             textViewUserName.setText("Welcome, Guest");
             navigationLogout.setVisible(false);
 
@@ -128,6 +145,25 @@ public class HomePageActivity extends AppCompatActivity {
         fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                String result = data.getStringExtra("result");
+                if (result.equalsIgnoreCase("SUCCESS")) {
+                    User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
+                    textViewEmailId.setVisibility(View.VISIBLE);
+                    textViewUserName.setText(user.getFirstName() + " " + user.getLastName());
+                    textViewEmailId.setText(user.getEmailId());
+                }
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

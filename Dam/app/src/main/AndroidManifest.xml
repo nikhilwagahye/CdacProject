@@ -30,7 +30,10 @@
         <activity
             android:name=".ui.SignUpActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.EditUserDetailsActivity"></activity>
+        <activity android:name=".ui.ShopByCategoryActivity" />
+        <activity android:name=".ui.ShopBooksActivity"></activity>
     </application>
 
 </manifest>
