@@ -20,9 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cdac.projectdemo.R;
+import com.cdac.projectdemo.Utils.NetworkUtil;
 import com.cdac.projectdemo.Utils.SharedPreferenceManager;
 import com.cdac.projectdemo.model.User;
 import com.cdac.projectdemo.ui.fragments.HomeFragment;
+import com.cdac.projectdemo.ui.fragments.OrdersFragment;
 
 import java.util.prefs.Preferences;
 
@@ -36,6 +38,7 @@ public class HomePageActivity extends AppCompatActivity {
     private TextView textViewEmailId;
     private FragmentManager fragManager;
     private LinearLayout linearLayoutEdit;
+    private LinearLayout linearLayoutShoppingCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,18 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        linearLayoutShoppingCart = (LinearLayout) findViewById(R.id.linearLayoutShoppingCart);
+        linearLayoutShoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (NetworkUtil.isConnectionAvailable(HomePageActivity.this)) {
+                    Intent intent = new Intent(HomePageActivity.this, CartActivity.class);
+                    startActivity(intent);
+                } else {
+                Toast.makeText(HomePageActivity.this, getString(R.string.no_internet_message), Toast.LENGTH_SHORT).show();
+            }
+            }
+        });
 
         Menu menu = navigationView.getMenu();
 
@@ -104,8 +119,9 @@ public class HomePageActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigationYourOrders:
-                        fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
+                        fragManager.beginTransaction().replace(R.id.dash_board_container, new OrdersFragment()).commit();
                         break;
+
 
                     case R.id.navigationYourAccount:
                         fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();

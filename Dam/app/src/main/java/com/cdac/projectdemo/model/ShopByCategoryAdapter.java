@@ -34,7 +34,6 @@ public class ShopByCategoryAdapter extends RecyclerView.Adapter<ShopByCategoryAd
 
     @Override
     public void onBindViewHolder(final ShopByCategoryAdapter.ViewHolder viewHolder, final int position) {
-        viewHolder.textView.setText("Item " + position);
     }
 
 
@@ -49,7 +48,6 @@ public class ShopByCategoryAdapter extends RecyclerView.Adapter<ShopByCategoryAd
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.textView);
         }
     }
 
