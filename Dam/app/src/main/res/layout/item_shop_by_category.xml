@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:padding="20dp"
-            android:text="Abcd"
+            android:text="Fiction Books"
             android:textColor="@color/white" />
     </LinearLayout>
 </RelativeLayout>

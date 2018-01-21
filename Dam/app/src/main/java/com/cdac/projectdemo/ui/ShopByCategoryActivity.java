@@ -1,6 +1,7 @@
 package com.cdac.projectdemo.ui;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.cdac.projectdemo.R;
 import com.cdac.projectdemo.model.ShopByCategoryAdapter;
@@ -24,6 +26,7 @@ public class ShopByCategoryActivity extends AppCompatActivity {
 
     private ShopByCategoryAdapter adapter;
     private GridView gridview;
+    private ImageView imageViewBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,13 @@ public class ShopByCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shop_by_category);
 
         initViews();
+        imageViewBack = (ImageView) findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToHome();
+            }
+        });
     }
 
     private void initViews() {
@@ -75,5 +85,17 @@ public class ShopByCategoryActivity extends AppCompatActivity {
             Log.e("Exception:", "here");
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToHome();
+    }
+
+    private void navigateToHome() {
+        Intent intent = new Intent(ShopByCategoryActivity.this, HomePageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }
