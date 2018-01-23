@@ -11,9 +11,6 @@ import android.widget.TextView;
 import com.cdac.projectdemo.R;
 import com.cdac.projectdemo.ui.ShopBooksActivity;
 
-/**
- * Created by nikhilkumar.waghaye on 17-01-2018.
- */
 
 public class TypesOfBoosAdapter extends RecyclerView.Adapter<TypesOfBoosAdapter.ViewHolder> {
 

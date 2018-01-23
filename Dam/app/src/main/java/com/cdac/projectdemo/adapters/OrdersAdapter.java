@@ -11,9 +11,7 @@ import android.view.ViewGroup;
 import com.cdac.projectdemo.R;
 import com.cdac.projectdemo.ui.ShoppingBoookDetailsActivity;
 
-/**
- * Created by nikhilkumar.waghaye on 20-01-2018.
- */
+
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
 

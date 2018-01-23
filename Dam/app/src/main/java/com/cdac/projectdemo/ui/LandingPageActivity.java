@@ -9,11 +9,17 @@ import android.widget.LinearLayout;
 
 import com.cdac.projectdemo.R;
 
+
+
+
 public class LandingPageActivity extends AppCompatActivity implements View.OnClickListener{
 
     private LinearLayout linearLayoutSkipRegistration;
     private Button buttonAlreadyCustomer;
     private Button buttonCreateAcccount;
+    private Button firebaseButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
         buttonAlreadyCustomer.setOnClickListener(this);
         buttonCreateAcccount = (Button) findViewById(R.id.buttonCreateAcccount);
         buttonCreateAcccount.setOnClickListener(this);
+        firebaseButton=(Button)findViewById(R.id.firebaseButton);
+        firebaseButton.setOnClickListener(this);
+
 
 
     }
@@ -46,6 +55,10 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             case R.id.buttonCreateAcccount:
                 Intent intent2 = new Intent(LandingPageActivity.this, SignUpActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.firebaseButton:
+                Intent intent3 = new Intent(LandingPageActivity.this, FirebaseServerActivity.class);
+                startActivity(intent3);
                 break;
         }
     }

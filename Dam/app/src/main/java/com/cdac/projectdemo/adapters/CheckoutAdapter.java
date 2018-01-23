@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 
 import com.cdac.projectdemo.R;
 
-/**
- * Created by nikhilkumar.waghaye on 21-01-2018.
- */
+
 
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHolder> {
 

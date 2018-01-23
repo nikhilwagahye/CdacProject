@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
 
-/**
- * Created by nikhilkumar.waghaye on 17-01-2018.
- */
 
 public class ShopByCategoryAdapter extends RecyclerView.Adapter<ShopByCategoryAdapter.ViewHolder> {
 

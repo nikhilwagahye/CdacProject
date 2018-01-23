@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "269362814052",
+    "firebase_url": "https://fir-booksellingapp.firebaseio.com",
+    "project_id": "fir-booksellingapp",
+    "storage_bucket": "fir-booksellingapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269362814052:android:d23667bda33ea0d2",
+        "android_client_info": {
+          "package_name": "com.server.firebase.booksellingappserver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269362814052-4qvjqlv9v1chm4j074e7vfs574bi4so4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA85nBRg7A0zQy5Zm6LvlY30KDm7XGY8A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

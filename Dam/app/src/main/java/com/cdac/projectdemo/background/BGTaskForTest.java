@@ -12,10 +12,6 @@ import com.cdac.projectdemo.interfacebinding.IDataResponse;
 
 import org.json.JSONArray;
 
-/**
- * Created by nikhilkumar.waghaye on 21-01-2018.
- */
-
 public class BGTaskForTest extends AsyncTask<String, String, JSONArray> {
     Activity context;
     private ProgressDialog dialog;

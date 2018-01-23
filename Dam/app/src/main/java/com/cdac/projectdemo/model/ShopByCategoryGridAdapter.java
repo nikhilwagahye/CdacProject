@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
 
-/**
- * Created by nikhilkumar.waghaye on 04-07-2017.
- */
 
 public class ShopByCategoryGridAdapter extends BaseAdapter {
 

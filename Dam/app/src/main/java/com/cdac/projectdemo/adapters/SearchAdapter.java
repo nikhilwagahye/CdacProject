@@ -16,9 +16,6 @@ import com.cdac.projectdemo.ui.ShoppingBoookDetailsActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by nikhilkumar.waghaye on 18-01-2018.
- */
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
