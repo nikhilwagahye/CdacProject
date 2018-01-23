@@ -33,16 +33,16 @@ public class CartActivity extends AppCompatActivity implements IDataResponse {
         setContentView(R.layout.activity_cart);
 
 
-        BGTaskForTest bgTaskForTest = new BGTaskForTest(CartActivity.this, this);
+     /*   BGTaskForTest bgTaskForTest = new BGTaskForTest(CartActivity.this, this);
         bgTaskForTest.execute();
-
+*/
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(CartActivity.this);
         recyclerView.setLayoutManager(mLayoutManager);
 
 
-        //recyclerView.setAdapter(new CartAdapter(CartActivity.this, 5));*/
+        recyclerView.setAdapter(new CartAdapter(CartActivity.this, 5));
     }
 
 
@@ -70,7 +70,7 @@ public class CartActivity extends AppCompatActivity implements IDataResponse {
                 }
             }
 
-            recyclerView.setAdapter(new CartAdapter(CartActivity.this, list));
+            //recyclerView.setAdapter(new CartAdapter(CartActivity.this, list));
         }
 
 

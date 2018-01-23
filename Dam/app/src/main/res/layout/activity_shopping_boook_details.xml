@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.cdac.projectdemo.ui.ShoppingBoookDetailsActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -23,10 +23,10 @@
             app:contentInsetStartWithNavigation="5dp">
 
             <ImageView
-                android:layout_marginLeft="20dp"
                 android:id="@+id/imageViewTitle"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/arrow_left_w" />
 
@@ -44,11 +44,12 @@
     </android.support.design.widget.AppBarLayout>
 
 
+
     <ScrollView
-        android:layout_below="@+id/appBarLayout"
-        android:layout_marginBottom="51dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_marginBottom="51dp"
         android:scrollbars="none">
 
         <LinearLayout
@@ -103,6 +104,7 @@
                     android:textSize="30sp" />
 
                 <TextView
+                    android:id="@+id/textViewPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -115,6 +117,16 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/textViewQuanityAvailable"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:text="Quantity Available :20"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/textViewName"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -134,19 +146,38 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="70">
+                    android:layout_weight="70"
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="4dp"
-                        android:gravity="left"
-                        android:text="- By J.K. Rowling"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp" />
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/textViewAuthor"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="4dp"
+                            android:gravity="left"
+                            android:text="- By J.K. Rowling"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/textViewPublishedBy"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="4dp"
+                            android:gravity="left"
+                            android:text="Publisher: "
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -200,15 +231,16 @@
                         android:layout_height="25dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:paddingRight="10dp"
                         android:padding="5dp"
                         android:paddingLeft="17dp"
+                        android:paddingRight="10dp"
                         android:src="@drawable/plus" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <TextView
+                android:id="@+id/textViewDesc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"

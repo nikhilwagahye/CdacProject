@@ -260,9 +260,9 @@ public class FirebaseServerActivity extends AppCompatActivity {
 
                 String cat1 = "booklist/Business and Economics";
                 String cat2 = "booklist/Travel";
-                String cat3 = "booklist/Editor's Corner";
+                String cat3 = "booklist/Editor Corner";
                 String cat4 = "booklist/Fiction";
-                String cat5 = "booklist/Children's & Young Adult";
+                String cat5 = "booklist/Children and Young Adult";
                 String cat6 = "booklist/Used Books";
 
 

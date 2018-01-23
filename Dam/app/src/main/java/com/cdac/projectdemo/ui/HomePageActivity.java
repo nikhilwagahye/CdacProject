@@ -49,6 +49,7 @@ public class HomePageActivity extends AppCompatActivity {
 
 
 
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

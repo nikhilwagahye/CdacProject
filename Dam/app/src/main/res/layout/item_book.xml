@@ -31,8 +31,9 @@
                 android:padding="5dp">
 
                 <ImageView
+                    android:id="@+id/imageView"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="150dp"
                     android:src="@drawable/book_image_new" />
 
 
@@ -53,6 +54,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textViewName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Harry Potter and Goblet of Fire"
@@ -60,6 +62,7 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/textViewAuthor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="By J.K. Rowling"
@@ -78,15 +81,16 @@
                             android:layout_height="wrap_content"
                             android:text="@string/rs"
                             android:textColor="@color/blue"
-                            android:textSize="30sp" />
+                            android:textSize="28sp" />
 
                         <TextView
+                            android:id="@+id/textViewPrice"
                             android:layout_marginLeft="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="200"
                             android:textColor="@color/blue"
-                            android:textSize="28sp"
+                            android:textSize="22sp"
                             android:textStyle="bold" />
 
 

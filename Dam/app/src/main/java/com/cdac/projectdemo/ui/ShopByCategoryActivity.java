@@ -56,8 +56,11 @@ public class ShopByCategoryActivity extends AppCompatActivity {
 
         List<String> listOfCategories = new ArrayList<String>();
         listOfCategories.add("Business and Economics");
-        listOfCategories.add("Editor's Corner");
-        listOfCategories.add("Travel");
+        listOfCategories.add("Children and Young Adult");
+        listOfCategories.add("Editor Corner");
+        listOfCategories.add("Fiction");
+        listOfCategories.add("Travel Books");
+        listOfCategories.add("Used Books");
 
         //pass this in adapter
         gridview.setAdapter(new ShopByCategoryGridAdapter(ShopByCategoryActivity.this, listOfCategories));
@@ -70,7 +73,10 @@ public class ShopByCategoryActivity extends AppCompatActivity {
                 String catName = (String)  adapterView.getItemAtPosition(i);
                 // navigate to Shop Books Activity
                 Intent intent = new Intent(ShopByCategoryActivity.this, ShopBooksActivity.class);
-                intent.putExtra("CategoryName", catName.replace(" ","%20"));
+                if(catName.contains("'")) {
+
+                }
+                intent.putExtra("CategoryName", catName);
                 startActivity(intent);
 
 

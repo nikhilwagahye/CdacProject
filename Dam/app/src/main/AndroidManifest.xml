@@ -44,7 +44,8 @@
         <activity android:name=".ui.CheckoutActivity" />
         <activity android:name=".ui.PaymentActivity" />
         <activity android:name=".ui.SuccessPageActivity" />
-        <activity android:name=".ui.FirebaseServerActivity"></activity>
+        <activity android:name=".ui.FirebaseServerActivity" />
+
     </application>
 
 </manifest>

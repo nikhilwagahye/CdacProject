@@ -23,12 +23,13 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     Activity context;
-    List<BookTest> list = new ArrayList<BookTest>();
 
-    public CartAdapter(Activity context, List<BookTest> list) {
+    int size;
+
+    public CartAdapter(Activity context, int size) {
         super();
         this.context = context;
-        this.list = list;
+        this.size = size;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final CartAdapter.ViewHolder viewHolder, final int position) {
 
-        BookTest bookTest = list.get(position);
+     /*   BookTest bookTest = list.get(position);
 
         viewHolder.textViewName.setText(bookTest.getBookName());
         viewHolder.textViewPrice.setText(bookTest.getBookPrice());
@@ -59,7 +60,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                         Log.i("", "Picasso Error - user profile pic");
                         viewHolder.imageView.setImageResource(R.drawable.book_image_new);
                     }
-                });
+                });*/
 
 
     }
@@ -67,7 +68,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return size;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
