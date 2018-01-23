@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
 
+import java.util.List;
+
 /**
  * Created by nikhilkumar.waghaye on 04-07-2017.
  */
@@ -17,16 +19,16 @@ import com.cdac.projectdemo.R;
 public class ShopByCategoryGridAdapter extends BaseAdapter {
 
     Activity context;
-    int size;
+    List<String> list;
 
-    public ShopByCategoryGridAdapter(Activity context, int size) {
+    public ShopByCategoryGridAdapter(Activity context, List<String> list) {
         this.context = context;
-        this.size = size;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return size;
+        return list.size();
     }
 
     @Override
@@ -50,9 +52,10 @@ public class ShopByCategoryGridAdapter extends BaseAdapter {
         } else {
             myView = (View) convertView;
         }
+        String category = list.get(position);
 
         TextView textView = (TextView) myView.findViewById(R.id.textView);
-        textView.setText("Item " + position);
+        textView.setText(category);
 
 
         return myView;

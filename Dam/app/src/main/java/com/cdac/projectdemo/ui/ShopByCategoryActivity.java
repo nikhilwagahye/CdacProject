@@ -21,6 +21,9 @@ import com.cdac.projectdemo.model.ShopByCategoryAdapter;
 import com.cdac.projectdemo.model.ShopByCategoryGridAdapter;
 import com.cdac.projectdemo.model.TypesOfBoosAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ShopByCategoryActivity extends AppCompatActivity {
 
@@ -50,12 +53,27 @@ public class ShopByCategoryActivity extends AppCompatActivity {
         adapter = new ShopByCategoryAdapter(ShopByCategoryActivity.this, 10);
         recyclerView.setAdapter(adapter);*/
         gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ShopByCategoryGridAdapter(ShopByCategoryActivity.this, 10));
+
+        List<String> listOfCategories = new ArrayList<String>();
+        listOfCategories.add("Business and Economics");
+        listOfCategories.add("Editor's Corner");
+        listOfCategories.add("Travel");
+
+        //pass this in adapter
+        gridview.setAdapter(new ShopByCategoryGridAdapter(ShopByCategoryActivity.this, listOfCategories));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                showDlg();
+                // showDlg();
+
+                String catName = (String)  adapterView.getItemAtPosition(i);
+                // navigate to Shop Books Activity
+                Intent intent = new Intent(ShopByCategoryActivity.this, ShopBooksActivity.class);
+                intent.putExtra("CategoryName", catName.replace(" ","%20"));
+                startActivity(intent);
+
+
             }
         });
     }
