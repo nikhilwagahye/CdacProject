@@ -24,10 +24,6 @@ import android.widget.LinearLayout;
 
 import com.cdac.projectdemo.R;
 
-
-/**
- * Created by nikhilkumar.waghaye on 27-07-2017.
- */
 public class PageControl extends LinearLayout implements View.OnClickListener, PageIndicator {
     private static float DEFAULT_INDICATOR_SIZE = 2.0F;
     private static float DEFAULT_INDICATOR_DISTANCE = 4.0F;

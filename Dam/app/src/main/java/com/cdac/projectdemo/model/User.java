@@ -1,8 +1,5 @@
 package com.cdac.projectdemo.model;
 
-/**
- * Created by nikhilkumar.waghaye on 20-01-2018.
- */
 
 public class User {
 

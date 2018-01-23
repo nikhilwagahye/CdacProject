@@ -1,6 +1,8 @@
 package com.cdac.projectdemo.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -44,6 +46,8 @@ public class HomePageActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -113,27 +117,44 @@ public class HomePageActivity extends AppCompatActivity {
                         // HomeFragment fragment = new HomeFragment();
                         fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
                         break;
-                    case R.id.navigationProfileItem:
-                        fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
-                        break;
-                    case R.id.navigationFaqItem:
+
+                    case R.id.navigationYourOrders:
                         fragManager.beginTransaction().replace(R.id.dash_board_container, new OrdersFragment()).commit();
-
                         break;
-                    case R.id.navigationPrivacyPolicy:
+
+
+                    case R.id.navigationYourAccount:
                         fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
-
                         break;
-                    case R.id.navigationTermsAndConditions:
+                    case R.id.navigationUserAddress:
                         fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
-
                         break;
+
                     case R.id.navigationLogout:
-                        SharedPreferenceManager.clearPreferences();
-                        Intent intent = new Intent(HomePageActivity.this, LandingPageActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomePageActivity.this);
+                        // Setting Dialog Title
+                        alertDialog.setTitle("Logout");
+                        // Setting Dialog Message
+                        alertDialog.setMessage("Are you sure you want to logout?");
+                        // Setting Icon to Dialog
+                        // Setting Positive "Yes" Button
+                        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int which) {
+                                SharedPreferenceManager.clearPreferences();
+                                Intent intent = new Intent(HomePageActivity.this, LandingPageActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        // Setting Negative "NO" Button
+                        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        // Showing Alert Message
+                        alertDialog.show();
 
                         break;
                 }

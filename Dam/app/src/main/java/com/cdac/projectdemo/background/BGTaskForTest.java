@@ -2,6 +2,7 @@ package com.cdac.projectdemo.background;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -11,13 +12,9 @@ import com.cdac.projectdemo.interfacebinding.IDataResponse;
 
 import org.json.JSONArray;
 
-/**
- * Created by nikhilkumar.waghaye on 21-01-2018.
- */
-
 public class BGTaskForTest extends AsyncTask<String, String, JSONArray> {
     Activity context;
-    private Dialog dialog;
+    private ProgressDialog dialog;
     private String testAPI;
     private JSONArray jsonArray;
     IDataResponse interfaceData;
@@ -36,7 +33,7 @@ public class BGTaskForTest extends AsyncTask<String, String, JSONArray> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog = new Dialog(context);
+        dialog = new ProgressDialog(context);
         dialog.setCancelable(false);
         dialog.setTitle("Test BGTask");
         dialog.show();

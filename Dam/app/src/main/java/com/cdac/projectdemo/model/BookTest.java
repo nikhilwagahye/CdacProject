@@ -1,9 +1,5 @@
 package com.cdac.projectdemo.model;
 
-/**
- * Created by nikhilkumar.waghaye on 21-01-2018.
- */
-
 public class BookTest {
     /*
      {

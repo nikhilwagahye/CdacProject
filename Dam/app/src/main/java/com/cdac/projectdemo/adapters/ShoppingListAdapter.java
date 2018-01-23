@@ -12,9 +12,7 @@ import android.widget.TextView;
 import com.cdac.projectdemo.R;
 import com.cdac.projectdemo.ui.ShoppingBoookDetailsActivity;
 
-/**
- * Created by nikhilkumar.waghaye on 20-01-2018.
- */
+
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder> {
 

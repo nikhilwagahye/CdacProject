@@ -37,5 +37,10 @@ public class ShopBooksActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(new ShoppingListAdapter(ShopBooksActivity.this, 20));
 
+
+        //intent intent
+        //api
+        //get intent
+
     }
 }

@@ -3,9 +3,6 @@ package com.cdac.projectdemo.Utils;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 
-/**
- * Created by nikhilkumar.waghaye on 21-01-2018.
- */
 
 public class Constabts {
     // sandbox
