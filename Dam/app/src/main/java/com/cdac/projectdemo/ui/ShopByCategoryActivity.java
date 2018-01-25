@@ -73,9 +73,7 @@ public class ShopByCategoryActivity extends AppCompatActivity {
                 String catName = (String)  adapterView.getItemAtPosition(i);
                 // navigate to Shop Books Activity
                 Intent intent = new Intent(ShopByCategoryActivity.this, ShopBooksActivity.class);
-                if(catName.contains("'")) {
 
-                }
                 intent.putExtra("CategoryName", catName);
                 startActivity(intent);
 

@@ -86,12 +86,21 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
+                <EditText
+                    android:id="@+id/editTextAddress"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="top|left"
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine"
+                    android:lines="7"
+                    android:scrollHorizontally="false"
                     android:text="Uttam Sharma  \nA22 Preet Vihar, Near Preet Vihar Metro Station \nEast Delhi - 110092 \nDelhi \nMobile: 98XXXX9049 \nEmail ID: abcd@gmail.com"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <View
                     android:layout_width="fill_parent"
@@ -100,6 +109,7 @@
                     android:background="@color/grey" />
 
                 <RelativeLayout
+                    android:id="@+id/lineLayoutAddress"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -180,7 +190,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
-                        android:text="15 Feb 2018"
+                        android:text="3 Feb 2018"
                         android:textColor="@color/white"
                         android:textStyle="normal" />
 
@@ -256,6 +266,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/textViewTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"

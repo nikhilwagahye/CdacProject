@@ -28,6 +28,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button buttonSignUp;
     private LinearLayout linearLayoutAccountAlready;
     private LinearLayout linearLayoutSkipRegistration;
+    private EditText editTextAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextLastName = (EditText) findViewById(R.id.editTextLastName);
         editTextEmailId = (EditText) findViewById(R.id.editTextEmailId);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(this);
         linearLayoutAccountAlready = (LinearLayout) findViewById(R.id.linearLayoutAccountAlready);
@@ -71,21 +73,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if (editTextEmailId.getText().toString().length() > 0) {
                             if (isValidEmailAddress(editTextEmailId.getText().toString().trim())) {
                                 if (editTextPassword.getText().toString().length() > 0 && editTextPassword.getText().toString().length() <= 6) {
+                                    if(editTextAddress.getText().toString().length() > 0) {
+                                        User user = new User();
+                                        user.setUserId(System.currentTimeMillis() + "");
+                                        user.setFirstName(editTextFirstName.getText().toString());
+                                        user.setLastName(editTextLastName.getText().toString());
+                                        user.setEmailId(editTextEmailId.getText().toString());
+                                        user.setPassword(editTextPassword.getText().toString());
+                                        user.setDateOfBirth(editTextDOB.getText().toString());
+                                        user.setAddress(editTextAddress.getText().toString());
+                                        SharedPreferenceManager.storeUserObjectInSharedPreference(user);
 
-                                    User user = new User();
-                                    user.setUserId("1");
-                                    user.setFirstName(editTextFirstName.getText().toString());
-                                    user.setLastName(editTextLastName.getText().toString());
-                                    user.setEmailId(editTextEmailId.getText().toString());
-                                    user.setPassword(editTextPassword.getText().toString());
-                                    user.setDateOfBirth(editTextDOB.getText().toString());
-                                    SharedPreferenceManager.storeUserObjectInSharedPreference(user);
+                                        Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                                    Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        editTextPassword.setError("Address field is empty");
 
-                                    startActivity(intent);
-                                    finish();
+                                    }
                                 } else {
                                     editTextPassword.setError("Password must be greater than 6 characters");
                                 }

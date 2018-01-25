@@ -26,6 +26,7 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
     private Button buttonUpdate;
     Calendar myCalendar;
     private User user;
+    private EditText editTextAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
         editTextDOB = (EditText) findViewById(R.id.editTextDOB);
         editTextDOB.setOnClickListener(this);
         myCalendar = Calendar.getInstance();
-
+        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
 
         editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
         editTextLastName = (EditText) findViewById(R.id.editTextLastName);
@@ -49,6 +50,7 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
             editTextFirstName.setText(user.getFirstName());
             editTextLastName.setText(user.getLastName());
             editTextDOB.setText(user.getDateOfBirth());
+            editTextAddress.setText(user.getAddress());
 
         }
     }
@@ -61,12 +63,13 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
                 if (editTextFirstName.getText().toString().length() > 0) {
                     if (editTextLastName.getText().toString().length() > 0) {
 
-                        user.setUserId("1");
+                        user.setUserId(user.getUserId());
                         user.setFirstName(editTextFirstName.getText().toString());
                         user.setLastName(editTextLastName.getText().toString());
                         user.setEmailId(user.getEmailId());
                         user.setPassword(user.getEmailId());
-                        user.setDateOfBirth(editTextDOB.getText().toString());
+                        user.setDateOfBirth(user.getUserId());
+                        user.setAddress(editTextAddress.getText().toString());
                         SharedPreferenceManager.storeUserObjectInSharedPreference(user);
                         hideKeyBoard();
 

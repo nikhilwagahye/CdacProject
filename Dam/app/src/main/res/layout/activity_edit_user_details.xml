@@ -122,6 +122,7 @@
 
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/textInputDOB"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -150,7 +151,34 @@
 
                     </android.support.design.widget.TextInputLayout>
 
+
+
                 </LinearLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/editTextAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address"
+                        android:lines="5"
+                        android:gravity="top|left"
+                        android:inputType="textMultiLine"
+                        android:scrollHorizontally="false"
+                        android:imeOptions="actionNext"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="15sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
 
                 <Button
                     android:id="@+id/buttonUpdate"

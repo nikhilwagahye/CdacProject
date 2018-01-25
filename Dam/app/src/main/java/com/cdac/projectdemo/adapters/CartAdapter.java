@@ -8,10 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
+import com.cdac.projectdemo.Utils.SharedPreferenceManager;
 import com.cdac.projectdemo.model.BookTest;
+import com.cdac.projectdemo.model.Cart;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -19,17 +24,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
+    private final DatabaseReference database;
     Activity context;
 
-    int size;
+    List<Cart> cartList;
 
-    public CartAdapter(Activity context, int size) {
+    public CartAdapter(Activity context, List<Cart> cartList) {
         super();
         this.context = context;
-        this.size = size;
+        this.cartList = cartList;
+        database = FirebaseDatabase.getInstance().getReference();
+
     }
 
     @Override
@@ -43,13 +50,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final CartAdapter.ViewHolder viewHolder, final int position) {
 
-     /*   BookTest bookTest = list.get(position);
+        final Cart cart = cartList.get(position);
 
-        viewHolder.textViewName.setText(bookTest.getBookName());
-        viewHolder.textViewPrice.setText(bookTest.getBookPrice());
+        viewHolder.textViewName.setText(cart.getBookName());
+        double price = cart.getQty() * cart.getPrice();
 
+        viewHolder.textViewPrice.setText(price+"");
 
-        Picasso.with(context).load(bookTest.getBookURL()).placeholder(R.drawable.book_image_new)
+        Picasso.with(context).load(cart.getImageURL()).placeholder(R.drawable.book_image_new)
                 .into(viewHolder.imageView, new Callback.EmptyCallback() {
                     @Override
                     public void onSuccess() {
@@ -60,15 +68,43 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                         Log.i("", "Picasso Error - user profile pic");
                         viewHolder.imageView.setImageResource(R.drawable.book_image_new);
                     }
-                });*/
+                });
 
+
+        viewHolder.linearLayoutRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).child(cart.getCartId()).removeValue();
+                //cartList.remove(cart);
+              //  notifyDataSetChanged();
+//                updateView(position);
+
+            }
+        });
+    }
+
+
+    public void updateView(int position, List<Cart> list) {
+
+     /*   List<Cart> newList = this.cartList;
+        newList.remove(cart);
+        this.cartList = newList;
+        this.notifyDataSetChanged();*/
+
+     this.cartList = list;
+     this.notifyDataSetChanged();
+
+       /* this.cartList.remove(position);
+        this.notifyItemRemoved(position);
+        notifyItemRangeChanged(position, cartList.size());*/
 
     }
 
 
     @Override
     public int getItemCount() {
-        return size;
+        return cartList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -77,6 +113,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         TextView textViewName;
         TextView textViewPrice;
         ImageView imageView;
+        LinearLayout linearLayoutRemove;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -84,7 +121,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             textViewName = (TextView) itemView.findViewById(R.id.textViewName);
             textViewPrice = (TextView) itemView.findViewById(R.id.textViewPrice);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
-
+            linearLayoutRemove = (LinearLayout) itemView.findViewById(R.id.linearLayoutRemove);
         }
     }
 

@@ -9,18 +9,20 @@ public class User {
     String emailId;
     String password;
     String dateOfBirth;
+    String address;
 
 
     public User() {
     }
 
-    public User(String userId, String firstName, String lastName, String emailId, String password, String dateOfBirth) {
+    public User(String userId, String firstName, String lastName, String emailId, String password, String dateOfBirth, String address) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+        this.address = address;
     }
 
     public String getUserId() {
@@ -69,5 +71,13 @@ public class User {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

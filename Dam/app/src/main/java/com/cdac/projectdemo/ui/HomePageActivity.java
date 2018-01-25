@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,10 +23,20 @@ import android.widget.Toast;
 import com.cdac.projectdemo.R;
 import com.cdac.projectdemo.Utils.NetworkUtil;
 import com.cdac.projectdemo.Utils.SharedPreferenceManager;
+import com.cdac.projectdemo.adapters.CartAdapter;
+import com.cdac.projectdemo.model.Cart;
 import com.cdac.projectdemo.model.User;
 import com.cdac.projectdemo.ui.fragments.HomeFragment;
 import com.cdac.projectdemo.ui.fragments.OrdersFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.paypal.android.sdk.payments.LoginActivity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -39,6 +50,7 @@ public class HomePageActivity extends AppCompatActivity {
     private FragmentManager fragManager;
     private LinearLayout linearLayoutEdit;
     private LinearLayout linearLayoutShoppingCart;
+    private TextView textViewBadgeCountDashBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +58,6 @@ public class HomePageActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
-
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -58,6 +68,7 @@ public class HomePageActivity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         toolBarHomePageTitle = (TextView) findViewById(R.id.toolBarHomePageTitle);
+        textViewBadgeCountDashBoard = (TextView) findViewById(R.id.textViewBadgeCountDashBoard);
 
         // for navigation view
         SharedPreferenceManager.setApplicationContext(HomePageActivity.this);
@@ -77,16 +88,23 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+
+
         linearLayoutShoppingCart = (LinearLayout) findViewById(R.id.linearLayoutShoppingCart);
         linearLayoutShoppingCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (NetworkUtil.isConnectionAvailable(HomePageActivity.this)) {
-                    Intent intent = new Intent(HomePageActivity.this, CartActivity.class);
-                    startActivity(intent);
+                    if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
+                        Intent intent = new Intent(HomePageActivity.this, CartActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(HomePageActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
-                Toast.makeText(HomePageActivity.this, getString(R.string.no_internet_message), Toast.LENGTH_SHORT).show();
-            }
+                    Toast.makeText(HomePageActivity.this, getString(R.string.no_internet_message), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -140,7 +158,7 @@ public class HomePageActivity extends AppCompatActivity {
                         // Setting Icon to Dialog
                         // Setting Positive "Yes" Button
                         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int which) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 SharedPreferenceManager.clearPreferences();
                                 Intent intent = new Intent(HomePageActivity.this, LandingPageActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -201,6 +219,38 @@ public class HomePageActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        final List<Cart> list = new ArrayList<Cart>();
+        database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    Cart cart = noteDataSnapshot.getValue(Cart.class);
+                    list.add(cart);
+                }
+
+                if(list.size() > 0) {
+                    textViewBadgeCountDashBoard.setVisibility(View.VISIBLE);
+                    textViewBadgeCountDashBoard.setText(list.size() + "");
+                } else {
+                    textViewBadgeCountDashBoard.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Log.e("Error", "Error");
+
+            }
+        });
     }
 
     @Override
