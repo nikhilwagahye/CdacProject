@@ -43,6 +43,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private RelativeLayout lineLayoutAddress;
     private TextView textViewTotal;
     private ImageView imageViewEdit;
+    private ImageView imageViewBack;
     boolean isEdit = false;
 
     @Override
@@ -60,6 +61,14 @@ public class CheckoutActivity extends AppCompatActivity {
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         textViewTotal = (TextView) findViewById(R.id.textViewTotal);
         imageViewEdit = (ImageView) findViewById(R.id.imageViewEdit);
+
+        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToCart();
+            }
+        });
 
         SharedPreferenceManager.setApplicationContext(CheckoutActivity.this);
         User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
@@ -156,6 +165,20 @@ public class CheckoutActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        navigateToCart();
+    }
+
+    private void navigateToCart()
+    {
+        Intent intent = new Intent(CheckoutActivity.this, CartActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
 }

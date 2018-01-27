@@ -1,9 +1,12 @@
 package com.cdac.projectdemo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
@@ -13,6 +16,7 @@ import com.cdac.projectdemo.background.BGTaskForShoppingBooks;
 import com.cdac.projectdemo.interfacebinding.IDataResponse;
 import com.cdac.projectdemo.model.BookList;
 import com.cdac.projectdemo.model.BookTest;
+import com.cdac.projectdemo.ui.fragments.ShopByCategory;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,11 +33,20 @@ public class ShopBooksActivity extends AppCompatActivity implements IDataRespons
     private String api;
     List<BookList> list = new ArrayList<BookList>();
     private TextView textViewTitle;
+    private ImageView imageViewBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_books);
+
+        imageViewBack=(ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToCategory();
+            }
+        });
 
 
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
@@ -101,6 +114,18 @@ public class ShopBooksActivity extends AppCompatActivity implements IDataRespons
         }
 
         recyclerView.setAdapter(new ShoppingListAdapter(ShopBooksActivity.this, list));
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToCategory();
+    }
+
+    private void navigateToCategory() {
+        Intent intent = new Intent(ShopBooksActivity.this, ShopByCategory.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
 }

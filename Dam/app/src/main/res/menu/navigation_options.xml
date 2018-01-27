@@ -14,16 +14,6 @@
             android:title="Your Orders"
             android:checked="false"
             android:icon="@drawable/menu_home" />
-        <item
-            android:id="@+id/navigationYourAccount"
-            android:title="Your Account"
-            android:checked="false"
-            android:icon="@drawable/menu_home" />
-        <item
-            android:id="@+id/navigationUserAddress"
-            android:title="My Address"
-            android:checked="false"
-            android:icon="@drawable/menu_home" />
 
         <item
             android:id="@+id/navigationLogout"

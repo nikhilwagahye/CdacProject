@@ -1,6 +1,7 @@
 package com.cdac.projectdemo.ui;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
     boolean flagAddedToCart = true;
     private LinearLayout linearLayoutShoppingCart;
     private TextView textViewBadgeCountDashBoard;
+    private ImageView imageViewBack;
 
     private ArrayList<Cart> list;
 
@@ -81,6 +83,14 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
 
         linearLayoutShoppingCart = (LinearLayout) findViewById(R.id.linearLayoutShoppingCart);
         textViewBadgeCountDashBoard = (TextView) findViewById(R.id.textViewBadgeCountDashBoard);
+
+        imageViewBack = (ImageView) findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToShopBooks();
+            }
+        });
 
 
         textViewDesc.setText(bookObject.getDescription());
@@ -268,5 +278,19 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        navigateToShopBooks();
+    }
+
+    private void navigateToShopBooks()
+    {
+        Intent intent = new Intent(ShoppingBoookDetailsActivity.this, ShopByCategoryActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }
