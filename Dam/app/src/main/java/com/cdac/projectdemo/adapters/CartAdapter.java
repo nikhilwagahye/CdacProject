@@ -10,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cdac.projectdemo.R;
 import com.cdac.projectdemo.Utils.SharedPreferenceManager;
 import com.cdac.projectdemo.model.BookTest;
 import com.cdac.projectdemo.model.Cart;
+import com.cdac.projectdemo.model.User;
+import com.cdac.projectdemo.ui.ShoppingBoookDetailsActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
@@ -30,11 +33,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     Activity context;
 
     List<Cart> cartList;
+    RecyclerView recyclerView;
+    TextView textViewNoData;
+    LinearLayout linearLayoutCheckout;
 
-    public CartAdapter(Activity context, List<Cart> cartList) {
+
+    public CartAdapter(Activity context, List<Cart> cartList, RecyclerView recyclerView, TextView textViewNoData, LinearLayout linearLayoutCheckout) {
         super();
         this.context = context;
         this.cartList = cartList;
+        this.recyclerView = recyclerView;
+        this.textViewNoData = textViewNoData;
+        this.linearLayoutCheckout = linearLayoutCheckout;
         database = FirebaseDatabase.getInstance().getReference();
 
     }
@@ -53,9 +63,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         final Cart cart = cartList.get(position);
 
         viewHolder.textViewName.setText(cart.getBookName());
-        double price = cart.getQty() * cart.getPrice();
+        double price = cart.getQtyOrdered() * cart.getPrice();
 
-        viewHolder.textViewPrice.setText(price+"");
+        viewHolder.textViewPrice.setText(price + "");
+        viewHolder.textViewQuanityAvailable.setText("Quantity Available : " + cart.getTotalQtyAvailable());
+        viewHolder.textViewQty.setText(cart.getQtyOrdered() + "");
 
         Picasso.with(context).load(cart.getImageURL()).placeholder(R.drawable.book_image_new)
                 .into(viewHolder.imageView, new Callback.EmptyCallback() {
@@ -75,29 +87,83 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
 
-                database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).child(cart.getCartId()).removeValue();
-                //cartList.remove(cart);
-              //  notifyDataSetChanged();
-//                updateView(position);
+                final User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
 
+                if (user != null) {
+                    String cartNode = user.getUserId() + "/cartlist";
+                    database.child(cartNode).child(cart.getCartId()).removeValue();
+                    cartList.remove(position);
+                    updateView(cartList);
+                }
             }
         });
+
+
+        final double actualPrice = cart.getPrice();
+
+        viewHolder.imageViewPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int qty = Integer.parseInt(viewHolder.textViewQty.getText().toString());
+                if (qty < cart.getTotalQtyAvailable()) {
+                    qty = qty + 1;
+                    viewHolder.textViewQty.setText(qty + "");
+                    double price = qty * actualPrice;
+                    viewHolder.textViewPrice.setText(price + "");
+                    cart.setQtyOrdered(qty);
+                    updateCartValueToFirebase(cart);
+                } else {
+                    Toast.makeText(context, "Maximum available quantity of books reached.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        viewHolder.imageViewMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int qty = Integer.parseInt(viewHolder.textViewQty.getText().toString());
+                if (qty > 1) {
+                    qty = qty - 1;
+                    viewHolder.textViewQty.setText(qty + "");
+                    double price = qty * actualPrice;
+                    viewHolder.textViewPrice.setText(price + "");
+                    cart.setQtyOrdered(qty);
+                    updateCartValueToFirebase(cart);
+
+                } else {
+                    Toast.makeText(context, "Minimum 1 book should buy...", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+    }
+
+    private void updateCartValueToFirebase(Cart cart) {
+
+
+        final User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
+        if (user != null) {
+            String cartNode = user.getUserId() + "/cartlist";
+            database.child(cartNode).child(cart.getCartId()).setValue(cart);
+        }
+
     }
 
 
-    public void updateView(int position, List<Cart> list) {
+    public void updateView(List<Cart> list) {
+        this.cartList = list;
+        this.notifyDataSetChanged();
+        if (list != null && list.size() > 0) {
+            recyclerView.setVisibility(View.VISIBLE);
+            linearLayoutCheckout.setVisibility(View.VISIBLE);
+            textViewNoData.setVisibility(View.GONE);
+        } else {
+            recyclerView.setVisibility(View.GONE);
+            linearLayoutCheckout.setVisibility(View.GONE);
+            textViewNoData.setVisibility(View.VISIBLE);
 
-     /*   List<Cart> newList = this.cartList;
-        newList.remove(cart);
-        this.cartList = newList;
-        this.notifyDataSetChanged();*/
-
-     this.cartList = list;
-     this.notifyDataSetChanged();
-
-       /* this.cartList.remove(position);
-        this.notifyItemRemoved(position);
-        notifyItemRangeChanged(position, cartList.size());*/
+        }
 
     }
 
@@ -114,6 +180,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         TextView textViewPrice;
         ImageView imageView;
         LinearLayout linearLayoutRemove;
+        TextView textViewQuanityAvailable;
+        ImageView imageViewMinus;
+        ImageView imageViewPlus;
+        TextView textViewQty;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -122,6 +192,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             textViewPrice = (TextView) itemView.findViewById(R.id.textViewPrice);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             linearLayoutRemove = (LinearLayout) itemView.findViewById(R.id.linearLayoutRemove);
+            textViewQuanityAvailable = (TextView) itemView.findViewById(R.id.textViewQuanityAvailable);
+
+            imageViewMinus = (ImageView) itemView.findViewById(R.id.imageViewMinus);
+            imageViewPlus = (ImageView) itemView.findViewById(R.id.imageViewPlus);
+            textViewQty = (TextView) itemView.findViewById(R.id.textViewQty);
         }
     }
 

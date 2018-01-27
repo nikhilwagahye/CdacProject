@@ -8,18 +8,20 @@ public class Cart {
     String imageURL;
     double price;
     String cartId;
-    int qty;
+    int qtyOrdered;
+    int totalQtyAvailable;
 
 
     public Cart() {
     }
 
-    public Cart(String bookName, String imageURL, double price, String cartId, int qty) {
+    public Cart(String bookName, String imageURL, double price, String cartId, int qtyOrdered, int totalQtyAvailable) {
         this.bookName = bookName;
         this.imageURL = imageURL;
         this.price = price;
         this.cartId = cartId;
-        this.qty = qty;
+        this.qtyOrdered = qtyOrdered;
+        this.totalQtyAvailable = totalQtyAvailable;
     }
 
     public String getBookName() {
@@ -54,11 +56,19 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    public int getQty() {
-        return qty;
+    public int getQtyOrdered() {
+        return qtyOrdered;
     }
 
-    public void setQty(int qty) {
-        this.qty = qty;
+    public void setQtyOrdered(int qtyOrdered) {
+        this.qtyOrdered = qtyOrdered;
+    }
+
+    public int getTotalQtyAvailable() {
+        return totalQtyAvailable;
+    }
+
+    public void setTotalQtyAvailable(int totalQtyAvailable) {
+        this.totalQtyAvailable = totalQtyAvailable;
     }
 }

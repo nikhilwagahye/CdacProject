@@ -99,7 +99,7 @@ public class HomePageActivity extends AppCompatActivity {
                         Intent intent = new Intent(HomePageActivity.this, CartActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(HomePageActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(HomePageActivity.this, SignInActivity.class);
                         startActivity(intent);
                     }
                 } else {
@@ -227,30 +227,35 @@ public class HomePageActivity extends AppCompatActivity {
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         final List<Cart> list = new ArrayList<Cart>();
-        database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    Cart cart = noteDataSnapshot.getValue(Cart.class);
-                    list.add(cart);
+        User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
+
+        if(user != null) {
+            String cartNode = user.getUserId() + "/cartlist";
+            database.child(cartNode).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                        Cart cart = noteDataSnapshot.getValue(Cart.class);
+                        list.add(cart);
+                    }
+
+                    if (list.size() > 0) {
+                        textViewBadgeCountDashBoard.setVisibility(View.VISIBLE);
+                        textViewBadgeCountDashBoard.setText(list.size() + "");
+                    } else {
+                        textViewBadgeCountDashBoard.setVisibility(View.INVISIBLE);
+                    }
+
                 }
 
-                if(list.size() > 0) {
-                    textViewBadgeCountDashBoard.setVisibility(View.VISIBLE);
-                    textViewBadgeCountDashBoard.setText(list.size() + "");
-                } else {
-                    textViewBadgeCountDashBoard.setVisibility(View.INVISIBLE);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                    Log.e("Error", "Error");
+
                 }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                Log.e("Error", "Error");
-
-            }
-        });
+            });
+        }
     }
 
     @Override

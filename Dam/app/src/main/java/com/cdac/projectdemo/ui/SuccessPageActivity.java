@@ -13,6 +13,7 @@ import com.cdac.projectdemo.Utils.SharedPreferenceManager;
 import com.cdac.projectdemo.adapters.CartAdapter;
 import com.cdac.projectdemo.model.Cart;
 import com.cdac.projectdemo.model.Orders;
+import com.cdac.projectdemo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,13 +33,15 @@ public class SuccessPageActivity extends AppCompatActivity {
     private DatabaseReference database;
 
     boolean flag;
+    private String cartNode;
+    private String ordersNode;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success_page);
         shopAgain = (Button) findViewById(R.id.shopAgain);
-
 
         shopAgain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,27 +54,34 @@ public class SuccessPageActivity extends AppCompatActivity {
         SharedPreferenceManager.setApplicationContext(SuccessPageActivity.this);
         database = FirebaseDatabase.getInstance().getReference();
         list = new ArrayList<Cart>();
-        database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (flag == false) {
-                    for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                        Cart cart = noteDataSnapshot.getValue(Cart.class);
-                        list.add(cart);
+        user = SharedPreferenceManager.getUserObjectFromSharedPreference();
 
+        if (user != null) {
+            cartNode = user.getUserId() + "/cartlist";
+
+            database.child(cartNode).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    if (flag == false) {
+                        for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                            Cart cart = noteDataSnapshot.getValue(Cart.class);
+                            list.add(cart);
+
+                        }
+                        addToOrders();
                     }
-                    addToOrders();
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                Log.e("Error", "Error");
+                    Log.e("Error", "Error");
 
-            }
-        });
+                }
+            });
+        }
 
 
     }
@@ -81,33 +91,33 @@ public class SuccessPageActivity extends AppCompatActivity {
 
         // add to orders
 
-        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a"); // format in which we need, 24/01/2018 07:30 pm --> a means pm/am , hh - 12 hr, HH - 24 hr format
         Date date = new Date();
         String datetime = myFormat.format(date);
 
-        final String ordersNode = "ordersListNew/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId();
+        if (user != null) {
+            ordersNode = user.getUserId() + "/ordersListNew";
 
-        for (int i = 0; i < list.size(); i++) {
-            Orders orders = new Orders();
-            orders.setOrderId(database.child(ordersNode).push().getKey());
-            orders.setModeOfPayment("Cash On Delivery");
-            orders.setName(list.get(i).getBookName());
-            orders.setOrderFlag(true);
-            orders.setImageURL(list.get(i).getImageURL());
-            orders.setQuantity(list.get(i).getQty());
-            orders.setOrderDate(datetime);
+            for (int i = 0; i < list.size(); i++) {
+                Orders orders = new Orders();
+                orders.setOrderId(database.child(ordersNode).push().getKey());
+                orders.setModeOfPayment("COD");
+                orders.setName(list.get(i).getBookName());
+                orders.setOrderFlag(true); // means order is not cancelled.
+                orders.setImageURL(list.get(i).getImageURL());
+                orders.setQuantity(list.get(i).getQtyOrdered());
+                orders.setOrderDate(datetime);
+                double price = list.get(i).getQtyOrdered() * list.get(i).getPrice();
+                orders.setPrice(price);
 
-            double price = list.get(i).getQty() * list.get(i).getPrice();
-            orders.setPrice(price);
+                database.child(ordersNode).child(orders.getOrderId()).setValue(orders);
+                flag = false;
+                // database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).child(list.get(i).getCartId()).removeValue();
+            }
 
-            database.child(ordersNode).child(orders.getOrderId()).setValue(orders);
-            flag = false;
-            // database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).child(list.get(i).getCartId()).removeValue();
+            flag = true;
+            database.child(cartNode).setValue(null);
         }
-
-        flag = true;
-        database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).setValue(null);
-
     }
 
     private void navigateToShopByCategory() {

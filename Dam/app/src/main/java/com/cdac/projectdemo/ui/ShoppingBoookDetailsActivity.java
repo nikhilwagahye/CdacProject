@@ -17,7 +17,9 @@ import com.cdac.projectdemo.adapters.CartAdapter;
 import com.cdac.projectdemo.adapters.CauroselPageAdapter;
 import com.cdac.projectdemo.model.BookList;
 import com.cdac.projectdemo.model.Cart;
+import com.cdac.projectdemo.model.User;
 import com.cdac.projectdemo.pageindicator.PageControl;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,30 +49,39 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
     private TextView textViewPrice;
     private DatabaseReference database;
 
-    boolean flagAddedToCart = false;
+    boolean flagAddedToCart = true;
+    private LinearLayout linearLayoutShoppingCart;
+    private TextView textViewBadgeCountDashBoard;
+
+    private ArrayList<Cart> list;
+
+    int count = 0;
+    private String cartNode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_boook_details);
 
-
         Gson gson = new Gson();
         bookObject = gson.fromJson(getIntent().getStringExtra("BookObject"), BookList.class);
-
 
         initCarouselData(bookObject.getImageUrl());
         imageViewMinus = (ImageView) findViewById(R.id.imageViewMinus);
         imageViewPlus = (ImageView) findViewById(R.id.imageViewPlus);
         textViewQty = (TextView) findViewById(R.id.textViewQty);
         linearLayoutAddToCart = (LinearLayout) findViewById(R.id.linearLayoutAddToCart);
-        linearLayoutCheckout = (LinearLayout) findViewById(R.id.linearLayoutCheckout);
+        // linearLayoutCheckout = (LinearLayout) findViewById(R.id.linearLayoutCheckout);
         textViewDesc = (TextView) findViewById(R.id.textViewDesc);
         textViewName = (TextView) findViewById(R.id.textViewName);
         textViewAuthor = (TextView) findViewById(R.id.textViewAuthor);
         textViewPublishedBy = (TextView) findViewById(R.id.textViewPublishedBy);
         textViewQuanityAvailable = (TextView) findViewById(R.id.textViewQuanityAvailable);
         textViewPrice = (TextView) findViewById(R.id.textViewPrice);
+
+        linearLayoutShoppingCart = (LinearLayout) findViewById(R.id.linearLayoutShoppingCart);
+        textViewBadgeCountDashBoard = (TextView) findViewById(R.id.textViewBadgeCountDashBoard);
+
 
         textViewDesc.setText(bookObject.getDescription());
         textViewAuthor.setText(bookObject.getAuthor());
@@ -113,65 +124,67 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
         SharedPreferenceManager.setApplicationContext(ShoppingBoookDetailsActivity.this);
 
         database = FirebaseDatabase.getInstance().getReference();
-
-        final String cartRootNode = "cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId();
-        final List<Cart> list = new ArrayList<Cart>();
-        database.child(cartRootNode).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    Cart cart = noteDataSnapshot.getValue(Cart.class);
-                    list.add(cart);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("Error", "Error");
-            }
-        });
-
+        final User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
+        if (user != null) {
+            cartNode = user.getUserId() + "/cartlist";
+        }
 
         linearLayoutAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (list != null && list.size() > 0) {
-                    for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).getBookName().equalsIgnoreCase(bookObject.getName())) {
-                            flagAddedToCart = false;
+
+                if (user != null) {
+
+                    if (list != null && list.size() > 0) {
+                        for (int i = 0; i < list.size(); i++) {
+                            Cart cart = list.get(i);
+                            if (bookObject.getName().equalsIgnoreCase(cart.getBookName())) {
+                                flagAddedToCart = false;
+                            }
+                        }
+
+                        if (flagAddedToCart) {
+                            Cart cart = new Cart();
+                            cart.setCartId(database.child(cartNode).push().getKey());
+                            cart.setBookName(bookObject.getName());
+                            cart.setImageURL(bookObject.getImageUrl().get(0));
+                            cart.setPrice(bookObject.getPrice());
+                            cart.setQtyOrdered(Integer.parseInt(textViewQty.getText().toString()));
+                            cart.setTotalQtyAvailable(bookObject.getQuantity());
+                            database.child(cartNode).child(cart.getCartId()).setValue(cart);
+                            count = count + 1;
+                            showCartCount(count);
+                            list.add(cart);
+
+                            Toast.makeText(ShoppingBoookDetailsActivity.this, "Added to cart.", Toast.LENGTH_SHORT).show();
                         } else {
                             flagAddedToCart = true;
+                            Toast.makeText(ShoppingBoookDetailsActivity.this, "This book is already added to cart.", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                    if (flagAddedToCart) {
+                    } else {
                         Cart cart = new Cart();
-                        cart.setCartId(database.child(cartRootNode).push().getKey());
+                        cart.setCartId(database.child(cartNode).push().getKey());
                         cart.setBookName(bookObject.getName());
                         cart.setImageURL(bookObject.getImageUrl().get(0));
                         cart.setPrice(bookObject.getPrice());
-                        cart.setQty(Integer.parseInt(textViewQty.getText().toString()));
-                        database.child(cartRootNode).child(cart.getCartId()).setValue(cart);
+                        cart.setQtyOrdered(Integer.parseInt(textViewQty.getText().toString()));
+                        cart.setTotalQtyAvailable(bookObject.getQuantity());
+                        database.child(cartNode).child(cart.getCartId()).setValue(cart);
                         flagAddedToCart = true;
-                        Toast.makeText(ShoppingBoookDetailsActivity.this, "Added to cart.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(ShoppingBoookDetailsActivity.this, "This book is already added to cart.", Toast.LENGTH_SHORT).show();
+                        list.add(cart);
+                        count = count + 1;
+                        showCartCount(count);
+                        Toast.makeText(ShoppingBoookDetailsActivity.this, "Added to cart", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Cart cart = new Cart();
-                    cart.setCartId(database.child(cartRootNode).push().getKey());
-                    cart.setBookName(bookObject.getName());
-                    cart.setImageURL(bookObject.getImageUrl().get(0));
-                    cart.setPrice(bookObject.getPrice());
-                    cart.setQty(Integer.parseInt(textViewQty.getText().toString()));
-                    database.child(cartRootNode).child(cart.getCartId()).setValue(cart);
-                    flagAddedToCart = true;
-                    Toast.makeText(ShoppingBoookDetailsActivity.this, "Added to cart.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ShoppingBoookDetailsActivity.this, SignInActivity.class);
+                    startActivity(intent);
                 }
             }
         });
 
 
-        linearLayoutCheckout.setOnClickListener(new View.OnClickListener() {
+     /*   linearLayoutCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -185,7 +198,30 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
 
 
             }
+        });*/
+
+
+        linearLayoutShoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
+                    Intent intent = new Intent(ShoppingBoookDetailsActivity.this, CartActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(ShoppingBoookDetailsActivity.this, SignInActivity.class);
+                    startActivity(intent);
+                }
+            }
         });
+    }
+
+    private void showCartCount(int size) {
+        if (size > 0) {
+            textViewBadgeCountDashBoard.setVisibility(View.VISIBLE);
+            textViewBadgeCountDashBoard.setText(size + "");
+        } else {
+            textViewBadgeCountDashBoard.setVisibility(View.GONE);
+        }
     }
 
     private void initCarouselData(List<String> imageList) {
@@ -198,6 +234,39 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
         page_control.setViewPager(viewPager);
         page_control.setPosition(0);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        list = new ArrayList<Cart>();
+
+        final User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
+        if (user != null) {
+            cartNode = user.getUserId() + "/cartlist";
+
+            database.child(cartNode).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    list.clear();
+                    for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                        Cart cart = noteDataSnapshot.getValue(Cart.class);
+                        list.add(cart);
+                        Log.e("Item:", cart.getBookName());
+                    }
+
+                    count = list.size();
+                    showCartCount(count);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("Error", "Error");
+                }
+            });
+        }
 
     }
 }

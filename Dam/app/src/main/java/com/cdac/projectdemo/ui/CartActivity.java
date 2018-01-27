@@ -23,6 +23,7 @@ import com.cdac.projectdemo.interfacebinding.IDataResponse;
 import com.cdac.projectdemo.model.BookList;
 import com.cdac.projectdemo.model.BookTest;
 import com.cdac.projectdemo.model.Cart;
+import com.cdac.projectdemo.model.User;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
@@ -68,90 +70,45 @@ public class CartActivity extends AppCompatActivity {
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         final List<Cart> list = new ArrayList<Cart>();
-        database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    Cart cart = noteDataSnapshot.getValue(Cart.class);
-                    list.add(cart);
+
+        User user = SharedPreferenceManager.getUserObjectFromSharedPreference();
+
+        if (user != null) {
+            String cartNode = user.getUserId() + "/cartlist";
+
+            database.child(cartNode).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                        Cart cart = noteDataSnapshot.getValue(Cart.class);
+                        list.add(cart);
+                    }
+
+                    progressDialog.cancel();
+
+                    if (list.size() > 0) {
+                        recyclerView.setVisibility(View.VISIBLE);
+                        linearLayoutCheckout.setVisibility(View.VISIBLE);
+                        textViewNoData.setVisibility(View.GONE);
+                        Collections.reverse(list);
+                        recyclerView.setAdapter(new CartAdapter(CartActivity.this, list, recyclerView, textViewNoData, linearLayoutCheckout));
+                    } else {
+                        textViewNoData.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
+                        linearLayoutCheckout.setVisibility(View.GONE);
+                    }
+
                 }
 
-                progressDialog.cancel();
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                if (list.size() > 0) {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    linearLayoutCheckout.setVisibility(View.VISIBLE);
-                    textViewNoData.setVisibility(View.GONE);
-                    recyclerView.setAdapter(new CartAdapter(CartActivity.this, list));
-                } else {
-                    textViewNoData.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
-                    linearLayoutCheckout.setVisibility(View.GONE);
+                    Log.e("Error", "Error");
+                    progressDialog.cancel();
+
                 }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                Log.e("Error", "Error");
-                progressDialog.cancel();
-
-            }
-        });
-
-
-
-/*
-        database.child("cartlist/" + SharedPreferenceManager.getUserObjectFromSharedPreference().getUserId()).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    Cart cart = noteDataSnapshot.getValue(Cart.class);
-                    list.add(cart);
-                }
-
-                progressDialog.cancel();
-
-                if (list.size() > 0) {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    linearLayoutCheckout.setVisibility(View.VISIBLE);
-                    textViewNoData.setVisibility(View.GONE);
-                    adapter = new CartAdapter(CartActivity.this, list);
-                    recyclerView.setAdapter(adapter);
-                } else {
-                    textViewNoData.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
-                    linearLayoutCheckout.setVisibility(View.GONE);
-                }
-
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-*/
-
+            });
+        }
 
 
         linearLayoutCheckout.setOnClickListener(new View.OnClickListener() {

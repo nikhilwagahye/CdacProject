@@ -46,10 +46,10 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         final Cart cart = list.get(position);
 
         viewHolder.textViewName.setText(cart.getBookName());
-        viewHolder.textViewQty.setText(cart.getQty() + "");
+        viewHolder.textViewQty.setText(cart.getQtyOrdered() + "");
 
         viewHolder.textViewPrice.setText(cart.getPrice() + "");
-        double price = cart.getQty() * cart.getPrice();
+        double price = cart.getQtyOrdered() * cart.getPrice();
 
         viewHolder.textViewPrice.setText(price+"");
 
