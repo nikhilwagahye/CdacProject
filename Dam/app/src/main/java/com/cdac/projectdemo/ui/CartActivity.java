@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ public class CartActivity extends AppCompatActivity {
     private LinearLayout linearLayoutCheckout;
     private TextView textViewNoData;
     private CartAdapter adapter;
+    private ImageView imageViewBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,14 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         textViewNoData = (TextView) findViewById(R.id.textViewNoData);
         linearLayoutCheckout = (LinearLayout) findViewById(R.id.linearLayoutCheckout);
+
+        imageViewBack=(ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToDetails();
+            }
+        });
 
         progressDialog = new ProgressDialog(CartActivity.this);
         progressDialog.setMessage("Please wait...");
@@ -120,6 +130,21 @@ public class CartActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+    @Override
+    public void onBackPressed()
+    {
+        navigateToDetails();
+    }
+
+    private void navigateToDetails()
+    {
+        Intent intent = new Intent(CartActivity.this, HomePageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
 }

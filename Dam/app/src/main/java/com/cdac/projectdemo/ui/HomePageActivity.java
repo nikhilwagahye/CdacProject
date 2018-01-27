@@ -141,14 +141,6 @@ public class HomePageActivity extends AppCompatActivity {
                         fragManager.beginTransaction().replace(R.id.dash_board_container, new OrdersFragment()).commit();
                         break;
 
-
-                    case R.id.navigationYourAccount:
-                        fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
-                        break;
-                    case R.id.navigationUserAddress:
-                        fragManager.beginTransaction().replace(R.id.dash_board_container, new HomeFragment()).commit();
-                        break;
-
                     case R.id.navigationLogout:
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomePageActivity.this);
                         // Setting Dialog Title

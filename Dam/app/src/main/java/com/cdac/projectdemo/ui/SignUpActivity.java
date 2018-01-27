@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.cdac.projectdemo.R;
@@ -29,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private LinearLayout linearLayoutAccountAlready;
     private LinearLayout linearLayoutSkipRegistration;
     private EditText editTextAddress;
+    private ImageView imageViewBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
+
+        imageViewBack=(ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToLanding();
+            }
+        });
+
         buttonSignUp.setOnClickListener(this);
         linearLayoutAccountAlready = (LinearLayout) findViewById(R.id.linearLayoutAccountAlready);
         linearLayoutSkipRegistration = (LinearLayout) findViewById(R.id.linearLayoutSkipRegistration);
@@ -150,5 +161,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToLanding();
+    }
+
+    private void navigateToLanding() {
+        Intent intent = new Intent(SignUpActivity.this, LandingPageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -42,6 +43,7 @@ public class PaymentActivity extends AppCompatActivity {
 
     int paymentIDSelected;
     private Button buttonProceed;
+    private ImageView imageViewBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,14 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 handlePayment();
+            }
+        });
+
+        imageViewBack = (ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToCheckout();
             }
         });
 
@@ -166,6 +176,19 @@ public class PaymentActivity extends AppCompatActivity {
 
     private void navigateToSuccess() {
         Intent intent = new Intent(PaymentActivity.this, SuccessPageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+    @Override
+    public void onBackPressed()
+    {
+        navigateToCheckout();
+    }
+
+    private void navigateToCheckout()
+    {
+        Intent intent = new Intent(PaymentActivity.this, CheckoutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();

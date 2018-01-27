@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
@@ -19,6 +20,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private EditText editTextPassword;
     private Button buttonSignIn;
     private LinearLayout linearLayoutSignUpForAccount;
+    private ImageView imageViewBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
         buttonSignIn.setOnClickListener(this);
+
+        imageViewBack=(ImageView)findViewById(R.id.imageViewBack);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToLanding();
+            }
+        });
 
         linearLayoutSignUpForAccount = (LinearLayout) findViewById(R.id.linearLayoutSignUpForAccount);
         linearLayoutSignUpForAccount.setOnClickListener(this);
@@ -83,4 +93,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
     }
+
+    @Override
+    public void onBackPressed() {
+        navigateToLanding();
+    }
+
+    private void navigateToLanding() {
+        Intent intent = new Intent(SignInActivity.this, LandingPageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
 }
