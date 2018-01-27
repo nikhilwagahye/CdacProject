@@ -1,21 +1,34 @@
 package com.cdac.projectdemo.ui;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.cdac.projectdemo.R;
 import com.cdac.projectdemo.Utils.SharedPreferenceManager;
+import com.cdac.projectdemo.adapters.CartAdapter;
+import com.cdac.projectdemo.model.Cart;
 import com.cdac.projectdemo.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +42,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private LinearLayout linearLayoutAccountAlready;
     private LinearLayout linearLayoutSkipRegistration;
     private EditText editTextAddress;
+    private String userNode;
+    private DatabaseReference database;
+    private List<User> list = new ArrayList<User>();
+    private ProgressDialog progressDialog;
+
+    boolean flagForSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +71,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         linearLayoutSkipRegistration.setOnClickListener(this);
 
         SharedPreferenceManager.setApplicationContext(SignUpActivity.this);
+        database = FirebaseDatabase.getInstance().getReference();
+
+        // get all users to check user trying to register is already registered with email id or not.
+
+        database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    User user = noteDataSnapshot.getValue(User.class);
+                    list.add(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("Error", "Error");
+            }
+        });
 
     }
 
@@ -73,7 +110,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if (editTextEmailId.getText().toString().length() > 0) {
                             if (isValidEmailAddress(editTextEmailId.getText().toString().trim())) {
                                 if (editTextPassword.getText().toString().length() > 0 && editTextPassword.getText().toString().length() <= 6) {
-                                    if(editTextAddress.getText().toString().length() > 0) {
+                                    if (editTextAddress.getText().toString().length() > 0) {
+
+                                        progressDialog = new ProgressDialog(SignUpActivity.this);
+                                        progressDialog.setMessage("Please wait...");
+                                        progressDialog.setCancelable(false);
+                                        progressDialog.show();
+
                                         User user = new User();
                                         user.setUserId(System.currentTimeMillis() + "");
                                         user.setFirstName(editTextFirstName.getText().toString());
@@ -82,13 +125,53 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         user.setPassword(editTextPassword.getText().toString());
                                         user.setDateOfBirth(editTextDOB.getText().toString());
                                         user.setAddress(editTextAddress.getText().toString());
-                                        SharedPreferenceManager.storeUserObjectInSharedPreference(user);
 
-                                        Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        // sending data to firebase
 
-                                        startActivity(intent);
-                                        finish();
+                                        if (list != null && list.size() > 0) {
+                                            for (int i = 0; i < list.size(); i++) {
+                                                User userFromServer = list.get(i);
+                                                if (userFromServer.getEmailId().equalsIgnoreCase(user.getEmailId())) {
+                                                    // User is already exists
+                                                    flagForSignUp = false;
+                                                    break;
+                                                } else {
+                                                    flagForSignUp = true;
+                                                }
+                                            }
+
+                                            if (flagForSignUp == true) {
+                                                progressDialog.cancel();
+                                                createUserToFirebase(user);
+                                                SharedPreferenceManager.storeUserObjectInSharedPreference(user);
+
+                                                Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                progressDialog.cancel();
+                                                Toast.makeText(SignUpActivity.this, "Email Id is already exists.", Toast.LENGTH_LONG).show();
+                                            }
+
+                                        } else {
+
+                                            // No user is present in Firebase DB
+                                            progressDialog.cancel();
+                                            createUserToFirebase(user);
+                                            SharedPreferenceManager.storeUserObjectInSharedPreference(user);
+
+                                            Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                            startActivity(intent);
+                                            finish();
+
+
+                                        }
+
+
                                     } else {
                                         editTextPassword.setError("Address field is empty");
 
@@ -125,6 +208,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 break;
         }
+    }
+
+    private void createUserToFirebase(User user) {
+
+        userNode = "users/";
+        database.child(userNode).child(user.getUserId()).setValue(user); // here, we can not use user id as its not firebase generated id, data in snapshot will come only after pushing data with firebase key.
+
     }
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {

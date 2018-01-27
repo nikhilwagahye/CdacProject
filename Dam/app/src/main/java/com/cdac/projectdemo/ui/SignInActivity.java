@@ -1,24 +1,40 @@
 package com.cdac.projectdemo.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.cdac.projectdemo.R;
 import com.cdac.projectdemo.Utils.SharedPreferenceManager;
 import com.cdac.projectdemo.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.ArrayList;
+import java.util.List;
+
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextEmailId;
     private EditText editTextPassword;
     private Button buttonSignIn;
     private LinearLayout linearLayoutSignUpForAccount;
+    private DatabaseReference database;
+    private List<User> list = new ArrayList<User>();
+
+    boolean flagForSuccessfulLogin;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +50,25 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         SharedPreferenceManager.setApplicationContext(SignInActivity.this);
 
+
+        database = FirebaseDatabase.getInstance().getReference();
+
+        // get all users to check user trying to login.
+        database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    User user = noteDataSnapshot.getValue(User.class);
+                    list.add(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("Error", "Error");
+            }
+        });
+
     }
 
     @Override
@@ -43,21 +78,30 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 if (editTextEmailId.getText().toString().length() > 0) {
                     if (isValidEmailAddress(editTextEmailId.getText().toString().trim())) {
                         if (editTextPassword.getText().toString().length() > 0 && editTextPassword.getText().toString().length() <= 6) {
+                            progressDialog = new ProgressDialog(SignInActivity.this);
+                            progressDialog.setMessage("Please wait...");
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+                            if (list != null && list.size() > 0) {
+                                for (int i = 0; i < list.size(); i++) {
+                                    User userFromServer = list.get(i);
+                                    if (userFromServer.getEmailId().equalsIgnoreCase(editTextEmailId.getText().toString()) &&
+                                            userFromServer.getPassword().equalsIgnoreCase(editTextPassword.getText().toString())) {
+                                        // Email Id and Password matched
+                                        // Login the user
+                                        flagForSuccessfulLogin = true;
+                                        handleLogin(userFromServer);
+                                        progressDialog.cancel();
+                                        break;
+                                    }
+                                }
+                            }
 
-                            User user = new User();
-                            user.setUserId("1");
-                            user.setEmailId(editTextEmailId.getText().toString());
-                            user.setPassword(editTextPassword.getText().toString());
-                            user.setDateOfBirth("22/04/1993");
-                            user.setFirstName("Pallavi");
-                            user.setLastName("Waghaye");
+                            if (flagForSuccessfulLogin == false) {
+                                progressDialog.cancel();
+                                Toast.makeText(SignInActivity.this, "User Name and Password does not exists. Please sign up.", Toast.LENGTH_LONG).show();
+                            }
 
-                            SharedPreferenceManager.storeUserObjectInSharedPreference(user);
-
-                            Intent intent = new Intent(SignInActivity.this, HomePageActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
                         } else {
                             editTextPassword.setError("Password must be greater than 6 characters");
                         }
@@ -75,6 +119,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void handleLogin(User userFromServer) {
+        SharedPreferenceManager.storeUserObjectInSharedPreference(userFromServer);
+        Intent intent = new Intent(SignInActivity.this, HomePageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public boolean isValidEmailAddress(String email) {
