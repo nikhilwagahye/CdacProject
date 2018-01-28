@@ -88,7 +88,7 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToShopBooks();
+                finish();
             }
         });
 
@@ -264,7 +264,9 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
                     for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                         Cart cart = noteDataSnapshot.getValue(Cart.class);
                         list.add(cart);
-                        Log.e("Item:", cart.getBookName());
+                        Log.e("Item" +
+                                "3" +
+                                ":", cart.getBookName());
                     }
 
                     count = list.size();
@@ -280,17 +282,4 @@ public class ShoppingBoookDetailsActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        navigateToShopBooks();
-    }
-
-    private void navigateToShopBooks()
-    {
-        Intent intent = new Intent(ShoppingBoookDetailsActivity.this, ShopByCategoryActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
 }

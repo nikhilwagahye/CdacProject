@@ -65,7 +65,11 @@
         android:horizontalSpacing="10dp"
         android:numColumns="2"
         android:scrollbars="none"
-        android:verticalSpacing="10dp" />
+        android:verticalSpacing="10dp"
+
+
+
+        />
 
 
 </RelativeLayout>

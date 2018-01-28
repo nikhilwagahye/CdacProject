@@ -84,6 +84,7 @@
             android:background="@color/yellow"
             android:layout_marginTop="15dp"
             android:textAllCaps="false"
+            android:visibility="gone"
             android:text="Go To Firebase" />
 
         <LinearLayout

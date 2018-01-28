@@ -71,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToLanding();
+                finish();
             }
         });
 
@@ -253,15 +253,4 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return m.matches();
     }
 
-    @Override
-    public void onBackPressed() {
-        navigateToLanding();
-    }
-
-    private void navigateToLanding() {
-        Intent intent = new Intent(SignUpActivity.this, LandingPageActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
 }

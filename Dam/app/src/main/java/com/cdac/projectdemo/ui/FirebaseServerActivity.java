@@ -90,23 +90,23 @@ public class FirebaseServerActivity extends AppCompatActivity {
 
                 List<String> Tlist2 = new ArrayList<String>();
                 //Born to Run=travel
-                Tlist1.add("https://images-na.ssl-images-amazon.com/images/I/81l271UiWaL.jpg");
-                Tlist1.add("https://images-na.ssl-images-amazon.com/images/I/719AwnOnStL.jpg");
+                Tlist2.add("https://images-na.ssl-images-amazon.com/images/I/81l271UiWaL.jpg");
+                Tlist2.add("https://images-na.ssl-images-amazon.com/images/I/719AwnOnStL.jpg");
 
                 List<String> Tlist3 = new ArrayList<String>();
                 //Into Thin Air=travel
-                Tlist1.add("https://images-na.ssl-images-amazon.com/images/I/511pyvWg3YL.jpg");
-                Tlist1.add("https://images-na.ssl-images-amazon.com/images/I/51x3rg99niL.jpg");
-                Tlist1.add("https://images-na.ssl-images-amazon.com/images/I/31%2BN-R4wZCL.jpg");
+                Tlist3.add("https://images-na.ssl-images-amazon.com/images/I/511pyvWg3YL.jpg");
+                Tlist3.add("https://images-na.ssl-images-amazon.com/images/I/51x3rg99niL.jpg");
+                Tlist3.add("https://images-na.ssl-images-amazon.com/images/I/31%2BN-R4wZCL.jpg");
 
                 List<String> Tlist4 = new ArrayList<String>();
                 //The MotorCycle Diaries=travel
-                Tlist1.add("https://images-na.ssl-images-amazon.com/images/I/71hMNh-BWdL.jpg");
+                Tlist4.add("https://images-na.ssl-images-amazon.com/images/I/71hMNh-BWdL.jpg");
 
                 List<String> Tlist5 = new ArrayList<String>();
                 //Zen & The Art Of Motorcycle Maintenance=travel
-                Tlist1.add("https://images-na.ssl-images-amazon.com/images/I/81njOhS%2B1nL.jpg");
-                Tlist1.add("https://images-na.ssl-images-amazon.com/images/I/51yLAHlkqjL.jpg");
+                Tlist5.add("https://images-na.ssl-images-amazon.com/images/I/81njOhS%2B1nL.jpg");
+                Tlist5.add("https://images-na.ssl-images-amazon.com/images/I/51yLAHlkqjL.jpg");
 
 //editors corners images
                 List<String> Elist1 = new ArrayList<String>();
@@ -184,41 +184,45 @@ public class FirebaseServerActivity extends AppCompatActivity {
 
 
 //Children's & Young Adult images======================================
+
                 List<String> Clist1 = new ArrayList<String>();
-                //Diary Of a Wimpy Kids=editors corner
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/91nTClkODkL.jpg");
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/91R1lC3DVNL.jpg");
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/41YUa-2EQdL.jpg");
+                //Death Cure
+                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/81NP5IsU%2BzL.jpg");
+                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/81jfVCAUjBL.jpg");
 
                 List<String> Clist2 = new ArrayList<String>();
-                //Diary Of a Wimpy Kids=editors corner
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/91nTClkODkL.jpg");
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/91R1lC3DVNL.jpg");
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/41YUa-2EQdL.jpg");
+                //I am Yoga
+                Clist2.add("https://images-na.ssl-images-amazon.com/images/I/51jPTytrhaL._AC_SX75_CR,0,0,75,75_.jpg");
+                Clist2.add("https://images-na.ssl-images-amazon.com/images/I/51hPtMtKKCL.jpg");
+                Clist2.add("https://images-na.ssl-images-amazon.com/images/I/61v62UNC2EL.jpg");
+                Clist2.add("https://images-na.ssl-images-amazon.com/images/I/61DiMwtRamL.jpg");
+                Clist2.add("https://images-na.ssl-images-amazon.com/images/I/71Brjrxe%2BhL.jpg");
+                Clist2.add("https://images-na.ssl-images-amazon.com/images/I/61smmscAdDL.jpg");
 
                 List<String> Clist3 = new ArrayList<String>();
-                //Diary Of a Wimpy Kids=editors corner
-                Clist3.add("https://images-na.ssl-images-amazon.com/images/I/91nTClkODkL.jpg");
-                Clist3.add("https://images-na.ssl-images-amazon.com/images/I/91R1lC3DVNL.jpg");
-                Clist3.add("https://images-na.ssl-images-amazon.com/images/I/41YUa-2EQdL.jpg");
+                //The Dragon Prophecy
+                Clist3.add("https://images-na.ssl-images-amazon.com/images/I/51AiwNSZnrL.jpg");
+                Clist3.add("https://images-na.ssl-images-amazon.com/images/I/51FzzF%2BWQsL.jpg");
+                Clist3.add("https://images-na.ssl-images-amazon.com/images/I/41KKYqTBCvL.jpg");
+
 
                 List<String> Clist4 = new ArrayList<String>();
-                //Diary Of a Wimpy Kids=editors corner
-                Clist4.add("https://images-na.ssl-images-amazon.com/images/I/91nTClkODkL.jpg");
-                Clist4.add("https://images-na.ssl-images-amazon.com/images/I/91R1lC3DVNL.jpg");
-                Clist4.add("https://images-na.ssl-images-amazon.com/images/I/41YUa-2EQdL.jpg");
+                //The Haunted Castle
+                Clist4.add("https://images-na.ssl-images-amazon.com/images/I/81X-kmNhgdL.jpg");
+                Clist4.add("https://images-na.ssl-images-amazon.com/images/I/81H-jclFYiL.jpg");
+                Clist4.add("https://images-na.ssl-images-amazon.com/images/I/41Bgtxln4qL.jpg");
 
                 List<String> Clist5 = new ArrayList<String>();
-                //Diary Of a Wimpy Kids=editors corner
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/91nTClkODkL.jpg");
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/91R1lC3DVNL.jpg");
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/41YUa-2EQdL.jpg");
+                //The Magical Mission
+                Clist5.add("https://images-na.ssl-images-amazon.com/images/I/81beMakPviL.jpg");
+                Clist5.add("https://images-na.ssl-images-amazon.com/images/I/81qJAS4uogL.jpg");
 
                 List<String> Clist6 = new ArrayList<String>();
-                //Diary Of a Wimpy Kids=editors corner
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/91nTClkODkL.jpg");
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/91R1lC3DVNL.jpg");
-                Clist1.add("https://images-na.ssl-images-amazon.com/images/I/41YUa-2EQdL.jpg");
+                //The story Of Adam and Eve
+                Clist6.add("https://images-na.ssl-images-amazon.com/images/I/91XtTLSej1L.jpg");
+                Clist6.add("https://images-na.ssl-images-amazon.com/images/I/A16IYjx3%2BAL.jpg");
+
+
 
 //used books==========================================================
                 List<String> Ulist1 = new ArrayList<String>();
@@ -255,15 +259,96 @@ public class FirebaseServerActivity extends AppCompatActivity {
                 Ulist6.add("https://images-na.ssl-images-amazon.com/images/I/91NAkeIbCvL.jpg");
                 Ulist6.add("https://images-na.ssl-images-amazon.com/images/I/41cpI3uFNZL.jpg");
 
+                //Indian History Books.................................................................
+
+                List<String> Ilist1 = new ArrayList<String>();
+                //An Era Of Darkness-Indian History
+                Ilist1.add("https://images-na.ssl-images-amazon.com/images/I/91Tu6fhpR6L.jpg");
+
+
+                List<String> Ilist2 = new ArrayList<String>();
+                //Aurangzeb-Indian History
+                Ilist2.add("https://images-na.ssl-images-amazon.com/images/I/91Vi-BU5UGL.jpg");
+
+
+                List<String> Ilist3 = new ArrayList<String>();
+                //Indian Summer-Indian HIstory
+                Ilist3.add("https://images-na.ssl-images-amazon.com/images/I/51U4ZF5okvL.jpg");
+                Ilist3.add("https://images-na.ssl-images-amazon.com/images/I/81V7Myu3ddL.jpg");
+
+                List<String> Ilist4 = new ArrayList<String>();
+                //Indira-Indian History
+                Ilist4.add("https://images-na.ssl-images-amazon.com/images/I/81KP%2BYS9FZL.jpg");
+                Ilist4.add("https://images-na.ssl-images-amazon.com/images/I/71lm95aFkxL.jpg");
+
+                List<String> Ilist5 = new ArrayList<String>();
+                //The Argumentative Indian-Indian History
+                Ilist5.add("https://images-na.ssl-images-amazon.com/images/I/61luELyY5fL.jpg");
+                Ilist5.add("https://images-na.ssl-images-amazon.com/images/I/81pFv6SwgzL.jpg");
+
+                List<String> Ilist6 = new ArrayList<String>();
+                //The Discovery Of India-Indian History
+                Ilist6.add("https://images-na.ssl-images-amazon.com/images/I/61qCo8cKMnL.jpg");
+
+
+                //Society And Social Sciences Books.................................................................
+
+                List<String> Slist1 = new ArrayList<String>();
+                //A Feast Of Vultures-Society
+                Slist1.add("https://images-na.ssl-images-amazon.com/images/I/81wdKi56yyL.jpg");
+                Ilist1.add("https://images-na.ssl-images-amazon.com/images/I/81E8ZzW4fsL.jpg");
+
+
+                List<String> Slist2 = new ArrayList<String>();
+                //GirlBoss-Society
+                Slist2.add("https://images-na.ssl-images-amazon.com/images/I/81-R9UAlC3L.jpg");
+                Slist2.add("https://images-na.ssl-images-amazon.com/images/I/71Yg%2BPyLGKL.jpg");
+
+                List<String> Slist3 = new ArrayList<String>();
+                //Option B-Society
+                Slist3.add("https://images-na.ssl-images-amazon.com/images/I/71a-uOxqK7L.jpg");
+                Slist3.add("https://images-na.ssl-images-amazon.com/images/I/718Lo156StL.jpg");
+
+                List<String> Slist4 = new ArrayList<String>();
+                //Predictably Irrational-Society
+                Slist4.add("https://images-na.ssl-images-amazon.com/images/I/81brJ%2BJh0zL.jpg");
+                Slist4.add("https://images-na.ssl-images-amazon.com/images/I/81MieNss8sL.jpg");
+                Slist4.add("https://images-na.ssl-images-amazon.com/images/I/41uWM%2BB-WLL.jpg");
+
+                List<String> Slist5 = new ArrayList<String>();
+                //Quiet-Society
+                Slist5.add("https://images-na.ssl-images-amazon.com/images/I/71xEUuZsUoL.jpg");
+                Slist5.add("https://images-na.ssl-images-amazon.com/images/I/61G-WdxmyZL.jpg");
+                Slist5.add("https://images-na.ssl-images-amazon.com/images/I/31Em7R0DO1L.jpg");
+
+                List<String> Slist6 = new ArrayList<String>();
+                //Sapiens-Society
+                Slist6.add("https://images-na.ssl-images-amazon.com/images/I/41MJX6yzfeL.jpg");
+                Slist6.add("https://images-na.ssl-images-amazon.com/images/I/514PjiO3ViL.jpg");
+                Slist6.add("https://images-na.ssl-images-amazon.com/images/I/317PsVMj6nL.jpg");
+
+                List<String> Slist7 = new ArrayList<String>();
+                //The Immortals Of Meluha-Society
+                Slist7.add("https://images-na.ssl-images-amazon.com/images/I/515mxVegEUL.jpg");
+                Slist7.add("https://images-na.ssl-images-amazon.com/images/I/51FSSnfg%2BEL.jpg");
+                Slist7.add("https://images-na.ssl-images-amazon.com/images/I/41ammhSEZ4L.jpg");
+
+                List<String> Slist8= new ArrayList<String>();
+                //Untouchable-Society
+                Slist8.add("https://images-na.ssl-images-amazon.com/images/I/51Ba1MbtTkL.jpg");
+
 
 
 
                 String cat1 = "booklist/Business and Economics";
-                String cat2 = "booklist/Travel";
+                String cat2 = "booklist/Travel Books";
                 String cat3 = "booklist/Editor Corner";
                 String cat4 = "booklist/Fiction";
                 String cat5 = "booklist/Children and Young Adult";
                 String cat6 = "booklist/Used Books";
+                String cat7 = "booklist/Indian History";
+                String cat8 = "booklist/Society And Social Science";
+
 
 
 //bussiness & eco books list==================================================
@@ -304,7 +389,7 @@ public class FirebaseServerActivity extends AppCompatActivity {
                         "Pan; new edition (1 July 2011)", 352, Tlist3, 5, 235));
 
                 listForCat2.add(new BookList("4", "The Motorcycle Diaries", "Ernesto 'Che' Guevara", " The Motorcycle Diaries is a story which revolves around 2 men who embark on a road journey on a 1939 Norton 500cc cylinder motorcycle from Buenos Aires. They are out to discover and explore South America. This book had been written 8 years prior to the Cuban Revolution.",
-                        "Harper Perennial; Film tie-in edition edition (5 September 2007)", 200, Tlist4, 6, 1700));
+                        "Harper Perennial; Film tie-in edition edition (5 September 2007)", 200, Tlist4, 6, 174));
 
                 listForCat2.add(new BookList("5", "Zen & The Art Of Motorcycle Maintenance ", "Robert Pirsig", "Acclaimed as one of the most exciting books in the history of American letters, this modern epic became an instant bestseller upon publication in 1974, transforming a generation and continuing to inspire millions.",
                         "Vintage; The 40th Anniversary edition edition (11 September 2014)", 432, Tlist5, 2, 257));
@@ -332,35 +417,35 @@ public class FirebaseServerActivity extends AppCompatActivity {
                 //     public Book(String id, String name, String author, String description, List<String> imageUrl, int quantity, double price) {
 
                 listForCat4.add(new BookList("1", "Every One Has A Story", "Savi Sharma", "Everyone has a story. Meera, a fledgling writer who is in search of a story that can touch millions of lives. Vivaan, assistant branch manager at Citibank, who dreams of travelling the world. ,Kabir, a café manager who desires something of his own. Nisha, the despondent café customer who keeps secrets of her own.",
-                        "Westland; Latest edition (9 August 2016))",184, Elist1, 5, 75));
+                        "Westland; Latest edition (9 August 2016))",184, Flist1, 5, 75));
                 listForCat4.add(new BookList("2", "Harry Porter And The Cursed Child", "J.K. Rowling", "This book is written in script format, which is different from a novel format. The Eighth Tale in the Harry Potter Saga",
-                        "Little Brown; new edition (1 August 2016)",352, Elist2, 7, 405));
+                        "Little Brown; new edition (1 August 2016)",352, Flist2, 7, 405));
                 listForCat4.add(new BookList("3", "One Indian Girl", "Chetan Bhagat", "One Indian Girl is about an Indian girl who is intelligent and successful, because of which she finds it difficult to get love.",
-                        "Rupa Publications India; First edition (1 October 2016)",280, Elist3, 6, 71));
+                        "Rupa Publications India; First edition (1 October 2016)",280, Flist3, 6, 71));
                 listForCat4.add(new BookList("4", "The Alchemist", "Paulo Coelho", "Paulo Coelho's enchanting novel has inspired a devoted following around the world. This story, dazzling in its powerful simplicity and inspiring wisdom, is about an Andalusian shepherd boy named Santiago who travels from his homeland in Spain to the Egyptian desert in search of a treasure buried in the Pyramids.",
-                        "Harper; Later Printing edition (17 October 2005)",172, Elist4, 8, 174));
+                        "Harper; Later Printing edition (17 October 2005)",172, Flist4, 8, 174));
 
                 listForCat4.add(new BookList("5", "The Mahabharat Secret", "Christopher C. Doyle", "It is a thriller novel that revolves around mythology, science, religion and terrorism. The story-line takes the readers all the way back to ancient times in 244 B.C., where Emperor Ashoka the Great discovers a dark secret of the great Mahabharata. The secret is so dangerous that it could cause massive destruction to mankind if falls into wrong hands.",
-                        "Om Books International; First edition (21 October 2013)",386, Elist5, 5, 169));
+                        "Om Books International; First edition (21 October 2013)",386, Flist5, 5, 169));
 
                 listForCat4.add(new BookList("6", "The Three Mistakes Of My Life", "Chetan Bhagat", "The 3 Mistakes of my life is the third novel written by eminent Indian Author Chetan Bhagat. Based on cricket, business and religion, the novel is set against the backdrop of beautiful city Ahmedabad. Revolving around three young Indian boys Omi, Ishaan and Govind, the book goes on to narrate how the three are trying their best to make ends meet in the city.",
-                        "Rupa Publications India; 2nd edition edition (1 January 2014)",260, Elist6, 6, 100));
+                        "Rupa Publications India; 2nd edition edition (1 January 2014)",260, Flist6, 6, 100));
 //Children's & Young Adult==================================================
-                List<BookList> listForCat5 = new ArrayList<BookList>();
+                List<BookList> listForCat5= new ArrayList<BookList>();
                 //     public Book(String id, String name, String author, String description, List<String> imageUrl, int quantity, double price) {
 
-                listForCat5.add(new BookList("1", "Diary Of a Wimpy Kid", "Jeff Kinney", "Diary of a Wimpy Kid: Rodrick Rules is a sequel to the colossal hit 'Diary of a Wimpy Kid’. The story rotates around an 8th grader Gregory Heffley who is facing some problems which usually is not faced by a mid-school child.",
-                        "Penguin UK; Reprint edition (5 February 2009)",224, Elist1, 5, 148));
-                listForCat5.add(new BookList("2", "I Am Malala", "Malala Yousafzai", "Written by one defiant young women who stood up to the mounting atrocities of terrorist Taliban, this book describes the journey of a simple Pakistani girl from Swat Valley who stood up for a basic right to education that nearly cost her, her life.",
-                        "Orion Publishing Group; Latest edition (9 October 2014)",320, Elist2, 6, 174));
-                listForCat5.add(new BookList("3", "Looking For Alaska", "John Green", "This is an amazing first novel by a writer who is young enough to vividly remember his powerful years of high school and he expertly turns remembrance into story.",
-                        "Harpercollins; Latest edition (1 February 2013)",271, Elist3, 5, 171));
-                listForCat5.add(new BookList("4", "Steve Jobs", "Walter Isaacson", "An extraordinary book which gives us a unique insight into the life and thinking of the man who has single-handedly transformed the way we live today",
-                        "Little, Brown Book Group; 2015 edition (11 February 2015)",592, Elist4, 6, 274));
-                listForCat5.add(new BookList("5", "The Fault in our Stars", "John Green", "The Fault in Our Stars is distinct love story of two teenage cancer sufferers and revolves around a couple who fall for each other irrespective of the fact that they are struggling between life and death. This book blends in it all kinds of elements such as humor, sentiment and emotions.",
-                        "Penguin; Movie Tie-in Edition edition (28 May 2014)",336, Elist5, 4, 199));
-                listForCat5.add(new BookList("6", "Women And The Weight Loss Tamasha", "Rujuta Diwekar", "Women and The Weight Loss Tamasha is based on the health and nutrition fundamentals and principles. This book by renowned nutritionist, Rujuta Diwekar, helps women in losing weight, toning their bodies, bringing the glow on their faces and some sort of wisdom in their brains. The women have to concentrate on their weight issues right from their puberty, marriage, pregnancy to menopause. The body weight fluctuates with these hormonal changes in their bodies.",
-                        "Westland; 1 edition (27 December 2010)",374, Elist6, 5, 184));
+                listForCat5.add(new BookList("1","Death Cure","James Dashner ","The Death Cure is a 2011 young adult dystopian science fiction novel written by American writer James Dashner and the third book, fifth chronologically, in the Maze Runner series.","Scholastic; 1 edition (2 October 2013)",384,Clist1,6,219));
+
+                listForCat5.add(new BookList("2","I Am Yoga","Susan Verde & Peter H. Reynolds","An eagle soaring among the clouds or a star twinkling in the night sky ...a camel in the desert or a boat sailing across the sea--yoga has the power of transformation. Not only does it strengthen bodies and calm minds, but with a little imagination, it can show us that anything is possible.","Harry N. Abrams (8 September 2015)",32,Clist2,9,732));
+
+                listForCat5.add(new BookList("3","The Dragon Prophecy","Geronimo Stilton","The Dragon Prophecy is an autobiographical adventure which rotates around Geronimoâ€™s life. Geronimo is a slight artificial talking mouse who works as a journalist and an editor for a functional newspaper","Scholastic Incorporated; Special edition (1 September 2012)",320,Clist3,7,344));
+
+                listForCat5.add(new BookList("4","The Haunted Castle","Geronimo Stilton","A Childrenâ€™s Bookshelf Selection: Each month our editorâ€™s pick the best books for children and young adults by age to be a part of the childrenâ€™s bookshelf. These are editorial recommendations made by our team of experts.","Scholastic Incorporated; Reissue edition (1 July 2011)",110,Clist4,6,182));
+
+                listForCat5.add(new BookList("5","The Magical Mission","Geronimo Stilton","I was traveling to London, England on a secret mission! I had to investigate some strange occurrences --someone was trying to get their paws on the crown jewels! Trap came along, too, to compete in a big magic show. And before I could solve my mystery, Trap needed my help. To perform an impossible magic trick. Could I do it all? Squeak!","Scholastic (25 October 2016)",128,Clist5,8,164));
+
+                listForCat5.add(new BookList("6","The Story of Adam and Eve"," Pegasus Team","The Bible Story narrates the story of Joshua, who took over as the leader of Hebrews after Mosses and lead them to acquire the kingdom of Jericho. All the Bible stories have one common message that is to believe in god and everything else would be solved. In this book, the same message has been conveyed. The coloured pictures and easy text makes the story more interesting."," Pegasus; First edition (1 March 2012)",16,Clist6,7,57));
+
 //used books==================================================================
               List<BookList> listForCat6 = new ArrayList<BookList>();
                 //     public Book(String id, String name, String author, String description, List<String> imageUrl, int quantity, double price) {
@@ -379,7 +464,45 @@ public class FirebaseServerActivity extends AppCompatActivity {
                         "Goyal; Reprint edition (1 June 2011)",686, Ulist6, 2, 94));
 
 
-                for (int i = 0; i < 6; i++) {
+//Indian History Book List.................................................................
+
+                List<BookList> listForCat7 = new ArrayList<>();
+
+                listForCat7.add(new BookList("1","An Era Of Darkness","Shashi Tharoor","In An Era of Darkness, consummate debater and author Shashi Tharoor recreates the British Raj with all its horrors and also elucidates the awe-inspiring struggle of India's freedom fighters. He gives us a valuable insight on how dark forces operate and on who are harbingers of hopeâ€”it's a valuable lesson at a time when thugs are masquerading as our savioursâ€¦at a time when debate has been reduced to a cacophony of slogans and insults by bhakts.","Aleph Book Company; Latest edition (27 October 2016)",360,Ilist1,8,450));
+
+                listForCat7.add(new BookList("2","Aurangzeb","Audrey Truschke","Aurangzeb Alamgir (r. 1658â€“1707), the sixth Mughal emperor, is widely reviled in India today. Hindu hater, murderer and religious zealot are just a handful of the modern caricatures of this maligned ruler. While many continue to accept the storyline peddled by colonial-era thinkersâ€”that Aurangzeb, a Muslim, was a Hindu-loathing bigotâ€”there is an untold side to him as a man who strove to be a just, worthy Indian king.","Penguin Random House India (10 February 2017)",216,Ilist2,6,229));
+
+                listForCat7.add(new BookList("3","Indian Summer","Alex Von Tunzelmann","INDIAN SUMMER depicts the epic sweep of events that ripped apart the greatest empire the world has ever seen, and reveals the secrets of the most powerful players on the world stage: the Cold War conspiracies, the private deals, and the intense and clandestine love affair between the wife of the last viceroy and the first prime minister of free India. With wit, insight and a sharp eye for detail, Alex von Tunzelmann relates how a handful of people changed the world for ever.","Simon & Schuster; UK ed. edition (29 March 2008)",480,Ilist3,5,399));
+
+                listForCat7.add(new BookList("4","Indira","Katherine Frank ","This biography, the first to be written by an unpartisan, Western woman, will focus on Gandhiâ€™s role as a female leader of men in one of the most chauvinistic, complex and politicised cultures in the world.Comprehensive, yet also personal, Frankâ€™s biography will deal with power and how this often isolated woman handled it, alongside her family and her emotional life. It will be the definitive book on one of this centuryâ€™s most powerful and important women.","Harper Perennial (5 March 2007)",592,Ilist4,9,374));
+
+                listForCat7.add(new BookList("5","The Argumentative Indian","Amartya Sen","The Argumentative Indian: Writings on Indian History, Culture and Identity has been written by none other than Nobel Laureate Amartya Sen. The book comprises of sixteen interlinked essays that explain in detail the rich background on which India has built its foundations on. In four sections the book tries to delineate the importance of perceiving contemporary India easily.","Penguin UK; 1St Edition edition (29 August 2006)",256,Ilist5,7,206));
+
+                listForCat7.add(new BookList("6","The Discovery Of India","Jawaharlal Nehru","Jawaharlal Nehru wrote the book â€˜The Discovery of Indiaâ€™, during his imprisonment at Ahmednagar fort for participating in the Quit India Movement (1942 â€“ 1946). The book was written during Nehruâ€™s four years of confinement to solitude in prison and is his way of paying an homage to his beloved country and its rich culture.","Penguin India; New edition (1 February 2008)",656,Ilist6,8,370));
+
+
+                //Society And Social Sciences Book List................................................
+
+                List<BookList> listForCat8 = new ArrayList<>();
+
+                listForCat8.add(new BookList("1","A Feast Of Vultures","Josy Joseph","'Every day, millions of people - the rich, the poor and the many foreign visitors - are hunting for ways to get their business done in modern India. If they search in the right places and offer the appropriate price, there is always a facilitator who can get the job done. This book is a sneak preview of those searches, the middlemen who do those jobs, and the many opportunities that the fast-growing economy offers.' Josy Joseph draws upon two decades as an investigative journalist to expose a problem so pervasive that we do not have the words to speak of it.","HarperCollins India; 1 edition (28 July 2016)",256,Slist1,6,405));
+
+                listForCat8.add(new BookList("2","Girlboss","Sophia Amoruso","GIRLBOSS is more than a book and Sophia Amoruso is more than a purveyor of (fine and fly) garments. #GIRLBOSS is a movement - a philosophy for making your work life as fun, fresh and raunchy as your personal adventures. Sophia encourages us to own the qualities we've previously been ashamed of (bossiness, crudeness, petty thievery) in order to become the masters of our own destiny, financially independent and radically ourselves.","Portfolio (6 August 2015)",256,Slist2,7,409));
+
+                listForCat8.add(new BookList("3","Option B","Sheryl Sandberg","OPTION B offers compelling insights for dealing with hardships in our own lives and helping others in crisis. It turns out that post-traumatic growth is commonâ€”even after the most devastating experiences many people donâ€™t just bounce back but actually bounce forward. And pre-traumatic growth is also possible: people can build resilience even if they have not experienced tragedy. Sandberg and Grant explore how we can raise strong children, create resilient communities and workplaces and find meaning, love and joy in our lives.","Random House (24 April 2017)",256,Slist3,6,350));
+
+                listForCat8.add(new BookList("4","Predictably Irrational"," Dan Ariely","'Predictably Irrational: The Hidden Forces that Shape Our Decisionsâ€™ is a book on human behavior which tries to understand why we humans tend to make certain decisions and behave in certain ways. This book takes into account human reactions across a wide range of situations and tries to decipher the reasons. The main aspect of this book is to find out the process behind decision making. The intriguing language of this book along with the powerful narration makes this book a must have.","Harpercollins (18 February 2010",304,Slist4,9,252));
+
+                listForCat8.add(new BookList("5","Quiet","Susan Cain","'Quiet: The power of introverts in a world that can't stop talking' by Susa Cain is a Kick-starter of the quiet revolution and talks about all successful introverts. In todayâ€™s world where everyone has a lot to say, silence is quintessential and that is exactly what this book wants to convey. The power of silence is always underestimated but the writer has given some very useful and substantial insights about why it is so important. It also talks about some highly inspirational motivators in the world who were introverts like Dale Carnegie and Tony Robbins.","Penguin UK; Latest edition (3 February 2013)",352,Slist5,5,265));
+
+                listForCat8.add(new BookList("6","Sapiens","Yuval Noah Harari ","FIRE gave us power, FARMING made us hungry for more, MONEY gave us purpose,SCIENCE made us deadly.This is the thrilling account of our extraordinary history â€“ from insignificant apes to rulers of the world.","Penguin Random House; Paperback edition (11 June 2015)",512,Slist6,6,273));
+
+                listForCat8.add(new BookList("7","The Immortals Of Meluha","Amish ","An intense story 'The Immortals of Meluha' draws heavily from stories and legends of Hindu mythology that have been passed on from generation to generation."," Westland; Revised Edition edition (24 July 2017)",415,Slist7,9,152));
+
+                listForCat8.add(new BookList("8","Untouchable","Mulk Raj Anand","Untouchable is a novel by Mulk Raj Anand published in 1935. The novel established Anand as one of India's leading English authors.The book was inspired by his aunt's experience when she had a meal with a Muslim woman and was treated as an outcast by his family.The plot of this book, Anand's first, revolves around the argument for eradicating the caste system.It depicts a day in the life of Bakha, a young \"sweeper\", who is \"untouchable\" due to his work cleaning latrines.","Penguin India; New edition edition (29 August 2001)",160,Slist8,8,156));
+
+
+                for (int i = 0; i < 8; i++) {
 
                     switch (i) {
 
@@ -426,6 +549,24 @@ public class FirebaseServerActivity extends AppCompatActivity {
                                 database.child(cat6).child(listForCat6.get(catType6).getId()).setValue(listForCat6.get(catType6));
                             }
                             break;
+                        case 6:
+                            //Category 7
+
+                            for (int catType7 = 0; catType7 < listForCat7.size(); catType7++) {
+                                BookList book = listForCat7.get(catType7);
+                                database.child(cat7).child(book.getId()).setValue(book);
+                            }
+                            break;
+                        case 7:
+                            //Category 8
+
+                            for (int catType8 = 0; catType8 < listForCat8.size(); catType8++) {
+                                BookList book = listForCat8.get(catType8);
+                                database.child(cat8).child(book.getId()).setValue(book);
+                            }
+                            break;
+
+
 
                     }
 

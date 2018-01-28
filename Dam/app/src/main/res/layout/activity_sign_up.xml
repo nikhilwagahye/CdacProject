@@ -252,7 +252,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="I aready have account"
+                    android:text="Existing User? Sign In"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 

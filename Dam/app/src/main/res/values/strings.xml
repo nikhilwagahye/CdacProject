@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjectDemo</string>
+    <string name="app_name">Books Corner</string>
     <string name="title">Books Corner</string>
     <string name="openDrawer">Open Drawer</string>
     <string name="closeDrawer">Close Drawer</string>

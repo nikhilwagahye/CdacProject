@@ -71,7 +71,7 @@ public class PaymentActivity extends AppCompatActivity {
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToCheckout();
+                finish();
             }
         });
 
@@ -180,18 +180,6 @@ public class PaymentActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    @Override
-    public void onBackPressed()
-    {
-        navigateToCheckout();
-    }
 
-    private void navigateToCheckout()
-    {
-        Intent intent = new Intent(PaymentActivity.this, CheckoutActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
 
 }

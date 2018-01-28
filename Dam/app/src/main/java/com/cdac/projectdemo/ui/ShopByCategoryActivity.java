@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.cdac.projectdemo.R;
+import com.cdac.projectdemo.model.Category;
 import com.cdac.projectdemo.model.ShopByCategoryAdapter;
 import com.cdac.projectdemo.model.ShopByCategoryGridAdapter;
 import com.cdac.projectdemo.model.TypesOfBoosAdapter;
@@ -54,13 +55,20 @@ public class ShopByCategoryActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);*/
         gridview = (GridView) findViewById(R.id.gridview);
 
-        List<String> listOfCategories = new ArrayList<String>();
-        listOfCategories.add("Business and Economics");
-        listOfCategories.add("Children and Young Adult");
-        listOfCategories.add("Editor Corner");
-        listOfCategories.add("Fiction");
-        listOfCategories.add("Travel Books");
-        listOfCategories.add("Used Books");
+        List<Category> listOfCategories = new ArrayList<Category>();
+        listOfCategories.add(new Category("Business and Economics",getResources().getDrawable(R.drawable.business)));
+        listOfCategories.add(new Category("Children and Young Adult",getResources().getDrawable(R.drawable.children)));
+
+        listOfCategories.add(new Category("Editor Corner",getResources().getDrawable(R.drawable.editor_corner)));
+
+        listOfCategories.add(new Category("Fiction",getResources().getDrawable(R.drawable.fiction)));
+
+        listOfCategories.add(new Category("Travel Books",getResources().getDrawable(R.drawable.travel)));
+        listOfCategories.add(new Category("Used Books",getResources().getDrawable(R.drawable.used)));
+        listOfCategories.add(new Category("Indian History",getResources().getDrawable(R.drawable.history)));
+        listOfCategories.add(new Category("Society And Social Science",getResources().getDrawable(R.drawable.society)));
+
+
 
         //pass this in adapter
         gridview.setAdapter(new ShopByCategoryGridAdapter(ShopByCategoryActivity.this, listOfCategories));
@@ -70,11 +78,11 @@ public class ShopByCategoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // showDlg();
 
-                String catName = (String)  adapterView.getItemAtPosition(i);
+                Category category = (Category)  adapterView.getItemAtPosition(i);
                 // navigate to Shop Books Activity
                 Intent intent = new Intent(ShopByCategoryActivity.this, ShopBooksActivity.class);
 
-                intent.putExtra("CategoryName", catName);
+                intent.putExtra("CategoryName", category.getCategoryName());
                 startActivity(intent);
 
 

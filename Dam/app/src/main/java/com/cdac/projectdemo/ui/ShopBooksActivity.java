@@ -44,7 +44,7 @@ public class ShopBooksActivity extends AppCompatActivity implements IDataRespons
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToCategory();
+                finish();
             }
         });
 
@@ -116,16 +116,5 @@ public class ShopBooksActivity extends AppCompatActivity implements IDataRespons
         recyclerView.setAdapter(new ShoppingListAdapter(ShopBooksActivity.this, list));
     }
 
-    @Override
-    public void onBackPressed() {
-        navigateToCategory();
-    }
-
-    private void navigateToCategory() {
-        Intent intent = new Intent(ShopBooksActivity.this, ShopByCategory.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
 
 }

@@ -69,7 +69,7 @@ public class CartActivity extends AppCompatActivity {
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToDetails();
+               finish();
             }
         });
 
@@ -132,18 +132,5 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    public void onBackPressed() {
-        navigateToDetails();
-    }
-
-    private void navigateToDetails()
-    {
-        Intent intent = new Intent(CartActivity.this, HomePageActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
 
 }

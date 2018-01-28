@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdac.projectdemo.R;
@@ -19,9 +20,9 @@ import java.util.List;
 public class ShopByCategoryGridAdapter extends BaseAdapter {
 
     Activity context;
-    List<String> list;
+    List<Category> list;
 
-    public ShopByCategoryGridAdapter(Activity context, List<String> list) {
+    public ShopByCategoryGridAdapter(Activity context, List<Category> list) {
         this.context = context;
         this.list = list;
     }
@@ -52,10 +53,14 @@ public class ShopByCategoryGridAdapter extends BaseAdapter {
         } else {
             myView = (View) convertView;
         }
-        String category = list.get(position);
+        Category category = list.get(position);
+
 
         TextView textView = (TextView) myView.findViewById(R.id.textView);
-        textView.setText(category);
+        ImageView myImage=(ImageView) myView.findViewById(R.id.myimage);
+        textView.setText(category.getCategoryName());
+        myImage.setImageDrawable(category.getCategoryImage());
+
 
 
         return myView;

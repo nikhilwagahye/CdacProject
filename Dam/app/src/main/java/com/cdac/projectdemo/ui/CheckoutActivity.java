@@ -66,7 +66,7 @@ public class CheckoutActivity extends AppCompatActivity {
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToCart();
+                finish();
             }
         });
 
@@ -167,18 +167,5 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        navigateToCart();
-    }
-
-    private void navigateToCart()
-    {
-        Intent intent = new Intent(CheckoutActivity.this, CartActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
 
 }

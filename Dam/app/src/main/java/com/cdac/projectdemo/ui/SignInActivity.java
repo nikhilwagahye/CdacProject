@@ -51,7 +51,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToLanding();
+                finish();
             }
         });
 
@@ -109,7 +109,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                             if (flagForSuccessfulLogin == false) {
                                 progressDialog.cancel();
-                                Toast.makeText(SignInActivity.this, "User Name and Password does not exists. Please sign up.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignInActivity.this, "Email Id or Password is incorrect.", Toast.LENGTH_LONG).show();
                             }
 
                         } else {
@@ -144,18 +144,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
-    }
-
-    @Override
-    public void onBackPressed() {
-        navigateToLanding();
-    }
-
-    private void navigateToLanding() {
-        Intent intent = new Intent(SignInActivity.this, LandingPageActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
     }
 
 }
