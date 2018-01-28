@@ -1,7 +1,14 @@
 package com.cdac.projectdemo.ui;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class SuccessPageActivity extends AppCompatActivity {
 
@@ -117,9 +125,51 @@ public class SuccessPageActivity extends AppCompatActivity {
 
             flag = true;
             database.child(cartNode).setValue(null);
+
+
+            // send notification
+            showLocalNotification();
+
         }
     }
 
+    private void showLocalNotification() {
+
+        int defaults = 0;
+        defaults = defaults | Notification.DEFAULT_LIGHTS;
+        defaults = defaults | Notification.DEFAULT_VIBRATE;
+        defaults = defaults | Notification.DEFAULT_SOUND;
+
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                SuccessPageActivity.this);
+
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+
+
+        Notification notification;
+        notification = mBuilder.setSmallIcon(R.mipmap.book_icn).setTicker("Order Successful").setWhen(0)
+                .setAutoCancel(true)
+                .setContentTitle("Order Successful")
+                //.setContentIntent(resultPendingIntent)
+                .setDefaults(defaults)
+                .setStyle(inboxStyle)
+                .setWhen(System.currentTimeMillis())
+                //.setSmallIcon(R.drawable.notification_icon)
+                .setSmallIcon(getNotificationIcon())
+                .setContentText("Your Order is confirmed. Thanks")
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Random random = new Random();
+        int m = random.nextInt(9999 - 1000) + 1000;
+        notificationManager.notify(m, notification);
+    }
+
+
+    private int getNotificationIcon() {
+        boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
+        return useWhiteIcon ? R.drawable.ic_stat_email : R.mipmap.book_icn;
+    }
     private void navigateToShopByCategory() {
         Intent intent = new Intent(SuccessPageActivity.this, ShopByCategoryActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

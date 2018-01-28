@@ -87,7 +87,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.buttonSignIn:
                 if (editTextEmailId.getText().toString().length() > 0) {
                     if (isValidEmailAddress(editTextEmailId.getText().toString().trim())) {
-                        if (editTextPassword.getText().toString().length() > 0 && editTextPassword.getText().toString().length() <= 6) {
+                        if (editTextPassword.getText().toString().length() >= 6) {
                             progressDialog = new ProgressDialog(SignInActivity.this);
                             progressDialog.setMessage("Please wait...");
                             progressDialog.setCancelable(false);

@@ -127,6 +127,8 @@
             </android.support.design.widget.TextInputLayout>
 
 
+
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputEmailLayout"
                 android:layout_width="match_parent"
@@ -142,6 +144,28 @@
                     android:hint="Email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputMobileNoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+                <EditText
+
+                    android:id="@+id/editTextMobileNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile Number"
+                    android:imeOptions="actionNext"
+                    android:inputType="number|phone"
+                    android:maxLength="10"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="15sp" />
@@ -170,6 +194,31 @@
                     android:textSize="15sp" />
             </android.support.design.widget.TextInputLayout>
 
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/editTextAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address"
+                    android:lines="5"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:scrollHorizontally="false"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:id="@+id/textInputDOB"
@@ -202,29 +251,6 @@
 
             </LinearLayout>
 
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/editTextAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Address"
-                    android:lines="5"
-                    android:gravity="top|left"
-                    android:inputType="textMultiLine"
-                    android:scrollHorizontally="false"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="15sp" />
-
-            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/buttonSignUp"

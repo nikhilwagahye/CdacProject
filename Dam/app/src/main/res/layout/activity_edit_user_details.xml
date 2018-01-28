@@ -71,7 +71,6 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/foxLogo"
                 android:layout_width="160dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
@@ -125,41 +124,52 @@
                 </android.support.design.widget.TextInputLayout>
 
 
-
-
-                <LinearLayout
-                    android:visibility="gone"
-                    android:id="@+id/textInputDOB"
-                    android:layout_width="fill_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputEmailLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:layout_marginRight="30dp">
 
-                    <android.support.design.widget.TextInputLayout
+                    <EditText
+
+                        android:id="@+id/editTextEmailId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white">
+                        android:hint="Email"
+                        android:enabled="false"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="15sp" />
 
-                        <EditText
-                            android:id="@+id/editTextDOB"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="false"
-                            android:enabled="true"
-                            android:focusable="false"
-                            android:hint="Date Of Birth (dd/MM/yyyy)"
-                            android:inputType="date"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="15sp" />
+                </android.support.design.widget.TextInputLayout>
 
-                    </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputMobileNoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp">
+
+                    <EditText
+
+                        android:id="@+id/editTextMobileNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mobile Number"
+                        android:imeOptions="actionNext"
+                        android:inputType="number|phone"
+                        android:maxLength="10"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="15sp" />
+
+                </android.support.design.widget.TextInputLayout>
 
 
 
-                </LinearLayout>
 
 
                 <android.support.design.widget.TextInputLayout
@@ -178,15 +188,49 @@
                         android:gravity="top|left"
                         android:inputType="textMultiLine"
                         android:scrollHorizontally="false"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
                         android:textSize="15sp" />
 
                 </android.support.design.widget.TextInputLayout>
 
+                <LinearLayout
+                    android:visibility="visible"
+                    android:id="@+id/textInputDOB"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white">
+
+                        <EditText
+                            android:id="@+id/editTextDOB"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:enabled="false"
+                            android:focusable="false"
+                            android:hint="Date Of Birth (dd/MM/yyyy)"
+                            android:inputType="date"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="15sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+
+                </LinearLayout>
 
                 <Button
+                    android:layout_marginBottom="30dp"
                     android:id="@+id/buttonUpdate"
                     android:layout_width="200dp"
                     android:layout_height="40dp"

@@ -50,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     boolean flagForSignUp;
     private ImageView imageViewBack;
+    private EditText editTextMobileNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextEmailId = (EditText) findViewById(R.id.editTextEmailId);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
+        editTextMobileNo = (EditText) findViewById(R.id.editTextMobileNo);
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
 
         imageViewBack=(ImageView)findViewById(R.id.imageViewBack);
@@ -120,38 +122,56 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     if (editTextLastName.getText().toString().length() > 0) {
                         if (editTextEmailId.getText().toString().length() > 0) {
                             if (isValidEmailAddress(editTextEmailId.getText().toString().trim())) {
-                                if (editTextPassword.getText().toString().length() > 0 && editTextPassword.getText().toString().length() <= 6) {
-                                    if (editTextAddress.getText().toString().length() > 0) {
+                                if(editTextMobileNo.getText().toString().length() == 10) {
+                                    if (editTextPassword.getText().toString().length() >= 6) {
+                                        if (editTextAddress.getText().toString().length() > 0) {
 
-                                        progressDialog = new ProgressDialog(SignUpActivity.this);
-                                        progressDialog.setMessage("Please wait...");
-                                        progressDialog.setCancelable(false);
-                                        progressDialog.show();
+                                            progressDialog = new ProgressDialog(SignUpActivity.this);
+                                            progressDialog.setMessage("Please wait...");
+                                            progressDialog.setCancelable(false);
+                                            progressDialog.show();
 
-                                        User user = new User();
-                                        user.setUserId(System.currentTimeMillis() + "");
-                                        user.setFirstName(editTextFirstName.getText().toString());
-                                        user.setLastName(editTextLastName.getText().toString());
-                                        user.setEmailId(editTextEmailId.getText().toString());
-                                        user.setPassword(editTextPassword.getText().toString());
-                                        user.setDateOfBirth(editTextDOB.getText().toString());
-                                        user.setAddress(editTextAddress.getText().toString());
+                                            User user = new User();
+                                            user.setUserId(System.currentTimeMillis() + "");
+                                            user.setFirstName(editTextFirstName.getText().toString());
+                                            user.setLastName(editTextLastName.getText().toString());
+                                            user.setEmailId(editTextEmailId.getText().toString());
+                                            user.setPassword(editTextPassword.getText().toString());
+                                            user.setDateOfBirth(editTextDOB.getText().toString());
+                                            user.setAddress(editTextAddress.getText().toString());
+                                            user.setMobileNo(editTextMobileNo.getText().toString());
+                                            // sending data to firebase
 
-                                        // sending data to firebase
-
-                                        if (list != null && list.size() > 0) {
-                                            for (int i = 0; i < list.size(); i++) {
-                                                User userFromServer = list.get(i);
-                                                if (userFromServer.getEmailId().equalsIgnoreCase(user.getEmailId())) {
-                                                    // User is already exists
-                                                    flagForSignUp = false;
-                                                    break;
-                                                } else {
-                                                    flagForSignUp = true;
+                                            if (list != null && list.size() > 0) {
+                                                for (int i = 0; i < list.size(); i++) {
+                                                    User userFromServer = list.get(i);
+                                                    if (userFromServer.getEmailId().equalsIgnoreCase(user.getEmailId())) {
+                                                        // User is already exists
+                                                        flagForSignUp = false;
+                                                        break;
+                                                    } else {
+                                                        flagForSignUp = true;
+                                                    }
                                                 }
-                                            }
 
-                                            if (flagForSignUp == true) {
+                                                if (flagForSignUp == true) {
+                                                    progressDialog.cancel();
+                                                    createUserToFirebase(user);
+                                                    SharedPreferenceManager.storeUserObjectInSharedPreference(user);
+
+                                                    Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    progressDialog.cancel();
+                                                    Toast.makeText(SignUpActivity.this, "Email Id is already exists.", Toast.LENGTH_LONG).show();
+                                                }
+
+                                            } else {
+
+                                                // No user is present in Firebase DB
                                                 progressDialog.cancel();
                                                 createUserToFirebase(user);
                                                 SharedPreferenceManager.storeUserObjectInSharedPreference(user);
@@ -161,34 +181,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                                                 startActivity(intent);
                                                 finish();
-                                            } else {
-                                                progressDialog.cancel();
-                                                Toast.makeText(SignUpActivity.this, "Email Id is already exists.", Toast.LENGTH_LONG).show();
+
+
                                             }
 
+
                                         } else {
-
-                                            // No user is present in Firebase DB
-                                            progressDialog.cancel();
-                                            createUserToFirebase(user);
-                                            SharedPreferenceManager.storeUserObjectInSharedPreference(user);
-
-                                            Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                                            startActivity(intent);
-                                            finish();
-
+                                            editTextPassword.setError("Address field is empty");
 
                                         }
-
-
                                     } else {
-                                        editTextPassword.setError("Address field is empty");
-
+                                        editTextPassword.setError("Password must be greater than 6 characters");
                                     }
                                 } else {
-                                    editTextPassword.setError("Password must be greater than 6 characters");
+                                    editTextMobileNo.setError("Mobile number must be valid");
                                 }
                             } else {
                                 editTextEmailId.setError("Email Id must be valid");

@@ -42,8 +42,7 @@
         <activity android:name=".ui.SearchActivity" />
         <activity
             android:name=".ui.CheckoutActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"
-            />
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize" />
         <activity android:name=".ui.PaymentActivity" />
         <activity android:name=".ui.SuccessPageActivity" />
         <activity android:name=".ui.FirebaseServerActivity" />

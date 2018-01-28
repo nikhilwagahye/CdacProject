@@ -1,7 +1,12 @@
 package com.cdac.projectdemo.adapters;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,12 +22,14 @@ import com.cdac.projectdemo.Utils.SharedPreferenceManager;
 import com.cdac.projectdemo.model.Orders;
 import com.cdac.projectdemo.model.User;
 import com.cdac.projectdemo.ui.ShoppingBoookDetailsActivity;
+import com.cdac.projectdemo.ui.SuccessPageActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Random;
 
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
@@ -85,6 +92,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     database.child(ordersNode).child(orders.getOrderId()).setValue(orders);
                     // update local UI
                     updateList(orders, position);
+                    showLocalNotification();
                 }
             }
         });
@@ -137,6 +145,45 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             textViewCancelledOrderMsg = (TextView) itemView.findViewById(R.id.textViewCancelledOrderMsg);
             linearLayoutCancel = (LinearLayout) itemView.findViewById(R.id.linearLayoutCancel);
         }
+    }
+
+
+    private void showLocalNotification() {
+
+        int defaults = 0;
+        defaults = defaults | Notification.DEFAULT_LIGHTS;
+        defaults = defaults | Notification.DEFAULT_VIBRATE;
+        defaults = defaults | Notification.DEFAULT_SOUND;
+
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                context);
+
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+
+
+        Notification notification;
+        notification = mBuilder.setSmallIcon(R.mipmap.book_icn).setTicker("Order Cancelled").setWhen(0)
+                .setAutoCancel(true)
+                .setContentTitle("Order Cancelled")
+                //.setContentIntent(resultPendingIntent)
+                .setDefaults(defaults)
+                .setStyle(inboxStyle)
+                .setWhen(System.currentTimeMillis())
+                //.setSmallIcon(R.drawable.notification_icon)
+                .setSmallIcon(getNotificationIcon())
+                .setContentText("Your Order is cancelled. Thanks")
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Random random = new Random();
+        int m = random.nextInt(9999 - 1000) + 1000;
+        notificationManager.notify(m, notification);
+    }
+
+
+    private int getNotificationIcon() {
+        boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
+        return useWhiteIcon ? R.drawable.ic_stat_email : R.mipmap.book_icn;
     }
 
 }

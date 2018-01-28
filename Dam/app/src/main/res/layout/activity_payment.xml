@@ -92,6 +92,7 @@
                 </LinearLayout>
 
                 <RadioButton
+                    android:visibility="gone"
                     android:id="@+id/checkout_payment_paypal_radio"
                     android:layout_width="match_parent"
                     android:layout_height="53.667dp"
@@ -103,6 +104,7 @@
                     android:textSize="17sp" />
 
                 <View
+                    android:visibility="gone"
                     android:id="@+id/divider_paypal_below_btn"
                     android:layout_width="fill_parent"
                     android:layout_height="0.667dp"

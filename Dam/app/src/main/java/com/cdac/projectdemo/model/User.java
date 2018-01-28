@@ -10,12 +10,13 @@ public class User {
     String password;
     String dateOfBirth;
     String address;
+    String mobileNo;
 
 
     public User() {
     }
 
-    public User(String userId, String firstName, String lastName, String emailId, String password, String dateOfBirth, String address) {
+    public User(String userId, String firstName, String lastName, String emailId, String password, String dateOfBirth, String address, String mobileNo) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,6 +24,7 @@ public class User {
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
+        this.mobileNo = mobileNo;
     }
 
     public String getUserId() {
@@ -79,5 +81,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
     }
 }
